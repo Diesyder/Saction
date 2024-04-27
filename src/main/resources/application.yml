@@ -1,0 +1,16 @@
+#数据库连接信息
+spring:
+  datasource:
+    username: root
+    password: Ljc212090311
+    url: jdbc:mysql://localhost:3306/studentsaction?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#配置Mybatis映射路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.StudentDemo.pojo
+
+#配置端口
+server:
+  port: 8080

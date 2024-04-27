@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.saction.mapper.UserMapper">
+
+    <insert id="addUser">
+        insert into user (account, password) values (#{account}, #{password})
+    </insert>
+
+    <update id="updateUser">
+        update user set account = #{user.account}, password = #{user.password} where id = #{user.id}
+    </update>
+
+    <delete id="deleteUser">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="findAllUser" resultType="com.example.saction.pojo.User">
+        select * from user
+    </select>
+
+    <select id="findUserById" resultType="com.example.saction.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="findUserByAccount" resultType="com.example.saction.pojo.User">
+        select * from user where account = #{account}
+    </select>
+
+    <select id="findUserByAccountAndPassword" resultType="com.example.saction.pojo.User">
+        select * from user where account = #{account} and password = #{password}
+    </select>
+
+    <update id="updateUserPassword">
+        update user set password = #{password} where account = #{account}
+    </update>
+
+    <update id="updateUserTrack">
+        update user set timeLoginLast = #{time}, ipLoginLast = #{ip} where account = #{account}
+    </update>
+
+    <update id="updateUserNameNick">
+        update user set nameNick = #{nameNick} where account = #{account}
+    </update>
+
+    <update id="updateUserNameReal">
+        update user set nameReal = #{nameReal} where account = #{account}
+    </update>
+
+</mapper>

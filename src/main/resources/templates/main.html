@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学生活动管理系统</title>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <style type="text/css">
+        #box, #box2, #box3, #box4 {
+            padding:10px;
+            border:1px solid green;
+        }
+    </style>
+    <!--JS-->
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+</head>
+
+<body>
+    <div>
+
+        <div class="div-top">
+            <table align="center" style="height: 75px">
+                <tr>
+                    <td style="width: 10%; margin: auto;">
+                        <img src="image/logo.png" class="img-logo">
+                    </td>
+                    <td style="width: 30%">
+                        <h2>大学生活动管理系统</h2>
+                    </td>
+                    <td style="width: 40%">
+
+                    </td>
+                    <td style="width: 10%">
+                        <a th:href="@{/login}">用户(<span th:text="${#session.getAttribute('accountShow')}"></span>)</a>
+                    </td>
+                    <td style="width: 10%">
+                        <a onclick="loginoutCheck()">登出</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="div-left">
+
+            <div class="div-headImage">
+                <img src="image/logo.png" class="img-head">
+            </div>
+
+            <div class="div-leftMenu" style="margin-top: unset">
+                <ul>
+                    <li><button class="btn-collapsible">活动列表</button></li>
+                    <li><button class="btn-collapsible">活动管理</button></li>
+                    <li><button class="btn-collapsible">我的活动</button></li>
+                    <li><button class="btn-collapsible">学生组织</button></li>
+                    <li><button class="btn-collapsible">组织管理</button></li>
+                    <li><button class="btn-collapsible">我的组织</button></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="div-right">
+
+            <main>
+                <!-- 活动列表 -->
+                <section id="activities">
+                    <!-- 在这里添加活动列表内容 -->
+                </section>
+
+                <!-- 学生组织 -->
+                <section id="organizations">
+                    <!-- 在这里添加学生组织内容 -->
+                </section>
+
+                <!-- 用户登录 -->
+                <section id="login">
+                    <!-- 在这里添加用户登录表单 -->
+                </section>
+
+                <div>
+
+                    <button class="btn-collapsible">展开更多</button>
+                    <div class="content">
+                        <p>这里是更多的内容1...</p>
+                        <p>这里是更多的内容2...</p>
+                        <p>这里是更多的内容3...</p>
+                    </div>
+
+                    <!-- 点击此按钮将触发 toggleButtons 函数 -->
+                    <button onclick="tempC()">展开更多按钮</button>
+                    <button onclick="openShutManager(this,'box')">展开更多按钮4</button>
+
+                    <!-- 额外的按钮，初始时隐藏 -->
+                    <button class="hidden">按钮 2</button>
+                    <button class="hidden">按钮 3</button>
+                    <button class="hidden">按钮 4</button>
+
+                    <button οnclick="openShutManager()">点击展开</button>
+                    <p><button οnclick="openShutManager(this,'box')">点击展开</button></p>
+                    <p id="box" style="display:none">
+                        这里面放的是box的内容.
+                    </p>
+                    <p><a οnclick="openShutManager(this,'box2',true)">点击展开</a></p>
+                    <p id="box2" style="display:none">
+                        这里面放的是box的内容.
+                    </p>
+                    <p><a οnclick="openShutManager(this,'box3',false,'点击关闭','点击展开')">点击展开</a></p>
+                    <p id="box3" style="display:none">
+                        这里面放的是box的内容.
+                    </p>
+                    <p><button οnclick="openShutManager(this,'box4',false,'点击关闭','点击展开')">点击展开</button></p>
+                    <p id="box4" style="display:none">
+                        这里面放的是box的内容.
+                    </p>
+                </div>
+
+            </main>
+
+            <footer>
+                <p>&copy; 2024 大学生活动管理系统</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
