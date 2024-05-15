@@ -68,6 +68,7 @@ a {
     z-index: 29;
 }
 
+/*右侧*/
 .div-right {
     position: absolute;
     top: 75px;
@@ -78,6 +79,7 @@ a {
     z-index: 19;
 }
 
+/*logo图片样式*/
 .img-logo {
     width: 64px;
     height: 64px;
@@ -85,6 +87,7 @@ a {
     border-radius: 50%;
 }
 
+/*头像图片样式*/
 .img-head {
     width: 108px;
     height: 108px;
@@ -97,7 +100,6 @@ a {
     object-fit: cover; /* 超出部分将被裁剪 */
 }
 
-/* 样式化按钮 */
 .btn-collapsible {
     background-color: #eee;
     color: #444;
@@ -109,11 +111,23 @@ a {
     outline: none;
     font-size: 15px;
     white-space: nowrap; /* 确保内容不换行 */
+    transition: 0.3s;
 }
-/* 鼠标悬停时添加背景色 */
-.active, .btn-collapsible:hover {
+.btn-collapsible:hover {
+    padding: 27px;
     background-color: #ccc;
+    font-size: 25px;
+    transition: 0.3s;
 }
+
+.btn-select {
+    background-color: #aaa;
+    /*box-shadow: inset 0px 0px 0px 2px #ffccaa;*/
+}
+.btn-select:hover {
+    background-color: #999;
+}
+
 /* 隐藏内容 */
 .content {
     padding: 0 18px;
@@ -132,4 +146,9 @@ a {
     to {
         opacity: 1;
     }
+}
+
+#box, #box2, #box3, #box4 {
+    padding:10px;
+    border:1px solid green;
 }

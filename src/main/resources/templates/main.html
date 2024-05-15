@@ -5,19 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大学生活动管理系统</title>
+    <link rel="icon" href="icon/Upan.ico" type="image/x-icon">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <style type="text/css">
-        #box, #box2, #box3, #box4 {
-            padding:10px;
-            border:1px solid green;
-        }
-    </style>
     <!--JS-->
-    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
@@ -41,7 +36,7 @@
                     <td style="width: 10%">
                         <a th:href="@{/login}">用户(<span th:text="${#session.getAttribute('accountShow')}"></span>)</a>
                     </td>
-                    <td style="width: 10%">
+                    <td style="width: 10%" th:if="${#session.getAttribute('accountShow') != '未登录' }">
                         <a onclick="loginoutCheck()">登出</a>
                     </td>
                 </tr>
@@ -56,12 +51,12 @@
 
             <div class="div-leftMenu" style="margin-top: unset">
                 <ul>
-                    <li><button class="btn-collapsible">活动列表</button></li>
-                    <li><button class="btn-collapsible">活动管理</button></li>
-                    <li><button class="btn-collapsible">我的活动</button></li>
-                    <li><button class="btn-collapsible">学生组织</button></li>
-                    <li><button class="btn-collapsible">组织管理</button></li>
-                    <li><button class="btn-collapsible">我的组织</button></li>
+                    <li><button class="btn-collapsible btn-select" id="btn-0" onclick="pageGoto('0')">活动列表</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-1')}"><button class="btn-collapsible" id="btn-1" onclick="pageGoto('1')">活动管理</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-2')}"><button class="btn-collapsible" id="btn-2" onclick="pageGoto('2')">我的活动</button></li>
+                    <li><button class="btn-collapsible" id="btn-3" onclick="pageGoto('3')">学生组织</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-4')}"><button class="btn-collapsible" id="btn-4" onclick="pageGoto('4')">组织管理</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-5')}"><button class="btn-collapsible" id="btn-5" onclick="pageGoto('5')">我的组织</button></li>
                 </ul>
             </div>
 
@@ -71,56 +66,34 @@
 
             <main>
                 <!-- 活动列表 -->
-                <section id="activities">
-                    <!-- 在这里添加活动列表内容 -->
+                <section id="activities" class="show">
+                    <h1>活动列表</h1>
+                </section>
+
+                <!-- 活动管理 -->
+                <section id="activitiesManage" class="hidden">
+                    <h1>活动管理</h1>
+                </section>
+
+                <!-- 我的活动 -->
+                <section id="MyActivities" class="hidden">
+                    <h1>我的活动</h1>
                 </section>
 
                 <!-- 学生组织 -->
-                <section id="organizations">
-                    <!-- 在这里添加学生组织内容 -->
+                <section id="organizations" class="hidden">
+                    <h1>学生组织</h1>
                 </section>
 
-                <!-- 用户登录 -->
-                <section id="login">
-                    <!-- 在这里添加用户登录表单 -->
+                <!-- 组织管理 -->
+                <section id="organizationsManage" class="hidden">
+                    <h1>组织管理</h1>
                 </section>
 
-                <div>
-
-                    <button class="btn-collapsible">展开更多</button>
-                    <div class="content">
-                        <p>这里是更多的内容1...</p>
-                        <p>这里是更多的内容2...</p>
-                        <p>这里是更多的内容3...</p>
-                    </div>
-
-                    <!-- 点击此按钮将触发 toggleButtons 函数 -->
-                    <button onclick="tempC()">展开更多按钮</button>
-                    <button onclick="openShutManager(this,'box')">展开更多按钮4</button>
-
-                    <!-- 额外的按钮，初始时隐藏 -->
-                    <button class="hidden">按钮 2</button>
-                    <button class="hidden">按钮 3</button>
-                    <button class="hidden">按钮 4</button>
-
-                    <button οnclick="openShutManager()">点击展开</button>
-                    <p><button οnclick="openShutManager(this,'box')">点击展开</button></p>
-                    <p id="box" style="display:none">
-                        这里面放的是box的内容.
-                    </p>
-                    <p><a οnclick="openShutManager(this,'box2',true)">点击展开</a></p>
-                    <p id="box2" style="display:none">
-                        这里面放的是box的内容.
-                    </p>
-                    <p><a οnclick="openShutManager(this,'box3',false,'点击关闭','点击展开')">点击展开</a></p>
-                    <p id="box3" style="display:none">
-                        这里面放的是box的内容.
-                    </p>
-                    <p><button οnclick="openShutManager(this,'box4',false,'点击关闭','点击展开')">点击展开</button></p>
-                    <p id="box4" style="display:none">
-                        这里面放的是box的内容.
-                    </p>
-                </div>
+                <!-- 我的组织 -->
+                <section id="MyOrganizations" class="hidden">
+                    <h1>我的组织</h1>
+                </section>
 
             </main>
 

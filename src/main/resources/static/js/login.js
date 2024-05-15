@@ -1,21 +1,6 @@
 // window.alert("你已进入登录界面，请注意隐私安全");
 // toastr.info('这是一个提示！', 'test', {timeOut: 3000, positionClass: 'toast-top-right', closeButton: false});
 
-// 事件处理
-function handler(e) {
-    e.stopPropagation();
-    e.preventDefault();
-}
-
-// toastr初始化
-function toastrInit() {
-    toastr.options.newestOnTop = false;
-    toastr.options.timeOut = 3000;
-    toastr.options.positionClass = "toast-top-center";
-    // toastr.options.preventDuplicates = true;
-    toastr.options.tapToDismiss = true;
-}
-
 // 验证码刷新
 function refreshCaptcha() {
     document.getElementById('imageCaptcha').src='/user/getCode?'+Math.random();
@@ -92,45 +77,6 @@ function loginCheck() {
         .catch(error => {
             console.error("请求出错：", error);
         });
-}
-
-// 登出检测
-function loginoutCheck() {
-    // 取消页面点击事件
-    document.addEventListener("banClick", handler, true);
-    // 调用登出接口
-    fetch("/user/loginOut", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
-    })
-        .then(response => response.json())
-        .then(resp => {
-            console.log(resp);
-            toastrInit();
-            if (resp.data != null) {
-                toastr.success("登出成功");
-                // 1秒后刷新页面
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
-                return;
-            }
-            // 重启页面点击事件
-            document.removeEventListener("banClick", handler, true);
-            switch (resp.code) {
-                case "102" :
-                    toastr.error("你尚未登录!", "登出失败");
-                    return;
-                default:
-                    toastr.error("出现了未知错误!", "登出失败");
-            }
-        })
-        .catch(error => {
-            console.error("请求出错：", error);
-        });
-
 }
 
 // 注册检测
@@ -253,23 +199,20 @@ function resetCheck() {
         });
 }
 
-// 显示登录界面
-function loginGoto() {
-    document.getElementById("login").className = "sign-div show";
-    document.getElementById("register").className = "sign-div hidden";
-    document.getElementById("reset").className = "sign-div hidden";
-}
-
-// 显示注册界面
-function registerGoto() {
-    document.getElementById("login").className = "sign-div hidden";
-    document.getElementById("register").className = "sign-div show";
-    document.getElementById("reset").className = "sign-div hidden";
-}
-
-// 显示重置密码界面
-function resetGoto() {
+// 页面跳转
+function pageGoto(where) {
     document.getElementById("login").className = "sign-div hidden";
     document.getElementById("register").className = "sign-div hidden";
-    document.getElementById("reset").className = "sign-div show";
+    document.getElementById("reset").className = "sign-div hidden";
+    switch (where) {
+        case "login" :
+            document.getElementById("login").className = "sign-div show";
+            return;
+        case "register" :
+            document.getElementById("register").className = "sign-div show";
+            return;
+        case "reset" :
+            document.getElementById("reset").className = "sign-div show";
+            return;
+    }
 }

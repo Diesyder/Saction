@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateAct {
+public class JoinAct {
     private int id; // 序号
     private int userid; // 用户id
-    private int actid;
-    private Long time;
-    private boolean isAskcompletion;
-    private boolean isCompleted;
+    private int actid; // 活动id
+    private Long time; // 报名时间
+    private boolean isSignin; // 是否签到
+    private boolean isSignout; // 是否签退
 }

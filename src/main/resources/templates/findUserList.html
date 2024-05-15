@@ -4,47 +4,24 @@
 <!--/*@thymesVar id="studentList" type="com.example.saction.controller"*/-->
 <head>
     <meta charset="UTF-8">
-    <title>查询所有</title>
+    <title>查询用户信息</title>
 </head>
 <body>
 
-    <table border="1">
+    <table border="1" align="center">
+
         <tr><!--列-->
             <th>ID</th>
             <th>账号</th>
             <th>密码</th>
-            <th>操作</th>
         </tr>
-        <tr th:each="student:${studentList}">
-            <td th:text="${student.getId()}"></td>
-            <td th:text="${student.getAccount()}"></td>
-            <td th:text="${student.getPassword()}"></td>
-            <td>
-                <a  role="button" th:href="@{/toupdateStudent/__${#numbers.formatInteger(student.getId(), 10)}__}">修改</a>
-                <a  role="button" th:href="@{/deleteStudent/__${#numbers.formatInteger(student.getId(), 10)}__}">删除</a>
-    <!--            Integer.parseInt(-->
-            </td>
-        </tr>
-    </table>
 
-    <div>
-        <a  role="button" th:href="@{/toaddStudent}">添加学生</a>
-        <a  role="button" th:href="@{/toindex}">返回首页</a>
-    </div>
-
-
-    <table border="1">
-        <tr><!--列-->
-            <th>ID</th>
-            <th>账号</th>
-            <th>密码</th>
-            <th>操作</th>
-        </tr>
         <tr th:each="user:${userList}">
             <td th:text="${user.getId()}"></td>
             <td th:text="${user.getAccount()}"></td>
             <td th:text="${user.getPassword()}"></td>
         </tr>
+
     </table>
 
 </body>

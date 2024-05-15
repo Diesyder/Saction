@@ -14,6 +14,9 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.io.OutputStream;
 
@@ -23,14 +26,29 @@ public class pageController {
 //    @Resource
 //    PageService pageService;
 
+    @Resource
+    UserService userService;
+
     //前往主界面
     @GetMapping("/main")
     public String jumpMain(HttpServletRequest request, Model model) {
-        // 如果已登录则传入用户信息
         HttpSession session = request.getSession();
+        // 按钮显示检查
+        session.setAttribute("showBtn-1", "false");
+        session.setAttribute("showBtn-2", "false");
+        session.setAttribute("showBtn-4", "false");
+        session.setAttribute("showBtn-5", "false");
+        // 如果已登录则传入用户信息
         String userLast = (String) session.getAttribute("accountCurrent");
         if (userLast != null) {
             session.setAttribute("accountShow", userLast);
+            session.setAttribute("showBtn-2", "true");
+            session.setAttribute("showBtn-5", "true");
+            User user = userService.loginIn(userLast);
+            if (user.getPriority() >= 9) {
+                session.setAttribute("showBtn-1", "true");
+                session.setAttribute("showBtn-4", "true");
+            }
         } else {
             session.setAttribute("accountShow", "未登录");
         }

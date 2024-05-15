@@ -85,7 +85,7 @@ input {
 
 .input-btn {
 	margin: 20px auto 10px;
-	width: 150px;
+	width: 160px;
 	font-size: medium;
 	border-radius: 28px;
 	cursor: pointer;
@@ -95,6 +95,7 @@ input {
 
 .input-btn:hover {
 	color: #fff;
+	width: 180px;
 	font-size: x-large;
 	border-radius: 12px;
 	transition: 0.5s;

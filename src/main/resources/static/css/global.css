@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     /* 加载背景图 */
-    background-image: url('nau.jpg');
+    background-image: url('../image/nau.jpg');
     /* 背景图垂直、水平均居中 */
     background-position: center center;
     /* 背景图不平铺 */
