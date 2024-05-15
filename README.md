@@ -1,1 +1,6 @@
-```git add.<br />git commit -m ""<br />git push ```
+```
+git status
+git add.
+git commit -m ""
+git push
+```
