@@ -12,6 +12,41 @@ ul {
     margin-bottom: 0;
 }
 
+.tableDisplay {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.column-center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+body {
+    /*margin-bottom: 50px; !* 为底部预留空间 *!*/
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    /*height: 50px; !* 假设页脚高度为100px *!*/
+}
+
+a[role="button"] {
+    color: black;
+    background-color: rgb(59, 120, 190, 0.2);
+}
+
+a[role="button"]:hover {
+    background-color: rgb(59, 120, 190, 0.5);
+}
+
+section {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 td {
     white-space: nowrap; /* 确保内容不换行 */
     overflow: hidden; /* 隐藏超出单元格的内容 */
@@ -22,13 +57,22 @@ a {
     display: inline-block;
     width: 99%; /* 设置宽度 */
     height: 20px; /* 设置高度 */
-    border: 1px solid #000; /* 添加边框 */
+    border: none; /* 无边框 */
     text-align: center; /* 文本居中 */
     line-height: 20px; /* 行高与高度相同，使文本垂直居中 */
     text-decoration: none; /* 去除下划线 */
 }
 
 .div-top {
+    position: fixed;
+    /*top: 0;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    width: 100%;
+    height: 75px;
+    z-index: 99;
+}
+.div-top-bg {
     position: fixed;
     /*top: 0;*/
     /*margin-left: auto;*/

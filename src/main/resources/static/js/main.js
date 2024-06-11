@@ -1,99 +1,49 @@
-// 页面跳转
-function pageGoto(where) {
-    // toastr.info('这是一个提示=' + where, 'test', {timeOut: 3000, positionClass: 'toast-top-right', closeButton: false});
-    document.getElementById("btn-0").className = "btn-collapsible";
-    if (document.getElementById("btn-1")) {
-        document.getElementById("btn-1").className = "btn-collapsible";
-    }
-    if (document.getElementById("btn-2")) {
-        document.getElementById("btn-2").className = "btn-collapsible";
-    }
-    document.getElementById("btn-3").className = "btn-collapsible";
-    if (document.getElementById("btn-4")) {
-        document.getElementById("btn-4").className = "btn-collapsible";
-    }
-    if (document.getElementById("btn-5")) {
-        document.getElementById("btn-5").className = "btn-collapsible";
-    }
-    document.getElementById("activities").className = "hidden";
-    document.getElementById("activitiesManage").className = "hidden";
-    document.getElementById("MyActivities").className = "hidden";
-    document.getElementById("organizations").className = "hidden";
-    document.getElementById("organizationsManage").className = "hidden";
-    document.getElementById("MyOrganizations").className = "hidden";
-    switch (where) {
-        case "0" :
-            document.getElementById("btn-0").className = "btn-collapsible btn-select";
-            document.getElementById("activities").className = "show";
-            return;
-        case "1" :
-            document.getElementById("btn-1").className = "btn-collapsible btn-select";
-            document.getElementById("activitiesManage").className = "show";
-            return;
-        case "2" :
-            document.getElementById("btn-2").className = "btn-collapsible btn-select";
-            document.getElementById("MyActivities").className = "show";
-            return;
-        case "3" :
-            document.getElementById("btn-3").className = "btn-collapsible btn-select";
-            document.getElementById("organizations").className = "show";
-            return;
-        case "4" :
-            document.getElementById("btn-4").className = "btn-collapsible btn-select";
-            document.getElementById("organizationsManage").className = "show";
-            return;
-        case "5" :
-            document.getElementById("btn-5").className = "btn-collapsible btn-select";
-            document.getElementById("MyOrganizations").className = "show";
-            return;
-    }
+// 页面初始化
+window.onload = function () {
+    // getInfo();
+    setTimeout(getInfo, 100); // 进入页面0.1秒后请求数据
 }
 
-// function spread() {
-//     this.classList.toggle("active");
-//     var content = this.nextElementSibling;
-//     if (content.style.maxHeight) {
-//         content.style.maxHeight = null;
-//     } else {
-//         content.style.maxHeight = content.scrollHeight + "px";
-//     }
-// }
-//
-// // 添加事件监听器
-// var coll = document.getElementsByClassName("collapsible");
-// for (var i = 0; i < coll.length; i++) {
-//     coll[i].addEventListener("click", spread);
-// }
-//
-// // 定义 showMoreButtons 函数
-// function toggleButtons() {
-//     // 获取所有隐藏的按钮
-//     var buttons = document.querySelectorAll('.hidden');
-//     // 遍历并切换按钮的显示状态
-//     for (var i = 0; i < buttons.length; i++) {
-//         buttons[i].classList.toggle('fade-in');
-//     }
-// }
-// function tempC() {
-//     document.getElementsByClassName("hidden").className = "fade-in";
-// }
-//
-//
-// function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip) {
-//     var sourceObj = typeof oSourceObj == "string" ? document.getElementById(oSourceObj) : oSourceObj;
-//     var targetObj = typeof oTargetObj == "string" ? document.getElementById(oTargetObj) : oTargetObj;
-//     var openTip = oOpenTip || "";
-//     var shutTip = oShutTip || "";
-//     if (targetObj.style.display != "none") {
-//         if (shutAble) return;
-//         targetObj.style.display = "none";
-//         if (openTip && shutTip) {
-//             sourceObj.innerHTML = shutTip;
-//         }
-//     } else {
-//         targetObj.style.display = "block";
-//         if (openTip && shutTip) {
-//             sourceObj.innerHTML = openTip;
-//         }
-//     }
-// }
+// 获取记忆的页面
+function getInfo() {
+    if (localStorage.getItem('selection') == null) {
+        localStorage.setItem('selection', 0);
+        return;
+    }
+    pageGoto(localStorage.getItem('selection'));
+}
+
+// 页面跳转
+function pageGoto(where) {
+    const btnIds = [
+        "btn-0",
+        "btn-1",
+        "btn-2",
+        "btn-3",
+        "btn-4",
+        "btn-5",
+        "btn-6",
+    ];
+    const selectIds = [
+        "activities",
+        "activitiesManage",
+        "myActivities",
+        "organizations",
+        "organizationsManage",
+        "myOrganizations",
+        "userManage"
+    ];
+    // 设置全部btn未选中和div不可见
+    for (let i = 0; i < btnIds.length; i++) {
+        const btnId = document.getElementById(btnIds[i]);
+        const selectId = document.getElementById(selectIds[i]);
+        if (btnId) btnId.className = "btn-collapsible";
+        selectId.className = "hidden";
+    }
+    // 显示可见区域
+    document.getElementById(btnIds[where]).className = "btn-collapsible btn-select";
+    document.getElementById(selectIds[where]).className = "show";
+    // 记忆当前选择
+    localStorage.setItem('selection', where);
+    return;
+}

@@ -10,16 +10,26 @@
 
     <table border="1" align="center">
 
-        <tr><!--列-->
+        <tr>
             <th>ID</th>
             <th>账号</th>
             <th>密码</th>
+            <th>昵称</th>
+            <th>名字</th>
+            <th>权限级别</th>
+            <th>最后登录时间</th>
+            <th>最后登录IP</th>
         </tr>
 
         <tr th:each="user:${userList}">
             <td th:text="${user.getId()}"></td>
             <td th:text="${user.getAccount()}"></td>
             <td th:text="${user.getPassword()}"></td>
+            <td th:text="${user.getNameNick()}"></td>
+            <td th:text="${user.getNameReal()}"></td>
+            <td th:text="${user.getPriority()}"></td>
+            <td th:text="${#dates.format(user.getTimeLoginLast(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${user.getIpLoginLast()}"></td>
         </tr>
 
     </table>

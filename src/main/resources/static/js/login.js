@@ -41,11 +41,8 @@ function loginCheck() {
             console.log(resp);
             if (resp.data != null) {
                 // 根据权限判断是否为管理员
-                if (resp.data.priority >= 9) {
-                    toastr.success("欢迎管理员：" + resp.data.account , "登录成功");
-                } else {
-                    toastr.success("欢迎用户：" + resp.data.account, "登录成功");
-                }
+                const identiy = resp.data.priority >= 9 ? "管理员" : "用户" ;
+                toastr.success("欢迎" + identiy + "：" + resp.data.nameNick, "登录成功");
                 // 1秒后跳转到下一个页面，同时刷新验证码和解锁按钮
                 setTimeout(function() {
                     window.location.href = "../main";
@@ -120,7 +117,7 @@ function registerCheck() {
                 document.getElementById("userAccountRegister").value = "";
                 document.getElementById("userPasswordRegister").value = "";
                 document.getElementById("userPasswordRegisterConfirm").value = "";
-                loginGoto();
+                pageGoto('login');
                 return;
             }
             switch (resp.code) {
@@ -201,18 +198,24 @@ function resetCheck() {
 
 // 页面跳转
 function pageGoto(where) {
-    document.getElementById("login").className = "sign-div hidden";
-    document.getElementById("register").className = "sign-div hidden";
-    document.getElementById("reset").className = "sign-div hidden";
     switch (where) {
         case "login" :
             document.getElementById("login").className = "sign-div show";
+            document.getElementById("register").className = "sign-div hidden";
+            document.getElementById("reset").className = "sign-div hidden";
             return;
         case "register" :
+            document.getElementById("login").className = "sign-div hidden";
             document.getElementById("register").className = "sign-div show";
+            document.getElementById("reset").className = "sign-div hidden";
             return;
         case "reset" :
+            document.getElementById("login").className = "sign-div hidden";
+            document.getElementById("register").className = "sign-div hidden";
             document.getElementById("reset").className = "sign-div show";
+            return;
+        case "main" :
+            window.location.href = "../main";
             return;
     }
 }

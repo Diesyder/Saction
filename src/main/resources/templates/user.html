@@ -5,78 +5,128 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>个人信息</title>
+        <link rel="icon" href="icon/Upan.ico" type="image/x-icon">
+        <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/global.css">
         <link rel="stylesheet" type="text/css" href="css/user.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+        <!--JS-->
+        <script type="text/javascript" src="js/global.js"></script>
+        <script type="text/javascript" src="js/user.js"></script>
+        <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     </head>
 
     <body>
 
         <a th:href="@{/user/findUserList}">[调试]用户信息</a><br>
-        <a th:href="@{/main}">回到主页面</a>
 
         <!--用户信息界面-->
         <div class="div">
 
-            <h1>个人信息表</h1>
+            <h1>用户个人信息</h1>
 
-            <table cellpadding="5" cellspacing="0" >
+            <div class="div-information">
 
-                <tr>
-                    <td>姓名</td>
-                    <td><input class="input-text" type="text" style="width:90%"></td>
-                    <td>性别</td>
-                    <td>
-                        <input type="radio" name="gender">男&nbsp;
-                        <input type="radio" name="gender">女
-                    </td>
-                </tr>
+                <table align="center" valign="middle">
 
-                <tr>
-                    <td>手机号码</td>
-                    <td><input class="input-text" type="tel" style="width:90%"></td>
-                    <td>电子邮箱</td>
-                    <td><input class="input-text" type="email" style="width:90%"></td>
-                </tr>
+                    <tr style="width: 500px">
+                        <td style="width: 80px">UUID</td>
+                        <td colspan="3" style="width: 420px">
+                            <input id="id" class="input-text" type="text" style="width: 100%" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>教育程度</td>
-                    <td><input class="input-text" style="width: 90%; " type="text"></td>
-                    <td>工作职位</td>
-                    <td><input class="input-text" style="width: 90%; " type="text"></td>
-                </tr>
+                    <tr>
+                        <td style="width: 80px">账号</td>
+                        <td style="width: 170px">
+                            <input id="account" class="input-text" type="text" readonly>
+                        </td>
+                        <td style="width: 80px">昵称</td>
+                        <td style="width: 170px">
+                            <input id="nameNick" class="input-text" type="text" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>工作城市</td>
-                    <td><input class="input-text" style="width: 90%; " type="text"></td>
-                    <td>期望工资</td>
-                    <td><input class="input-text" style="width: 90%; " type="text"></td>
-                </tr>
+                    <tr>
+                        <td>姓名</td>
+                        <td>
+                            <input id="nameReal" class="input-text" type="text" readonly>
+                        </td>
+                        <td>学号</td>
+                        <td>
+                            <input id="schoolId" class="input-text" type="text" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>自我介绍</td>
-                    <td colspan="3"><input class="input-text" type="text" style="width: 98%; " ></td>
+                    <tr>
+                        <td>性别</td>
+                        <td valign="center" align="left">
+                            <input id="gender_male" class="input-radio" type="radio" name="gender" value="male" disabled="true">男&nbsp;&nbsp;&nbsp;
+                            <input id="gender_female" class="input-radio" type="radio" name="gender" value="female" disabled="true">女
+                        </td>
+                        <td>班级</td>
+                        <td>
+                            <input id="schoolClass" class="input-text" type="text" readonly>
+                        </td>
+                    </tr>
 
-                </tr>
+                    <tr>
+                        <td>专业</td>
+                        <td>
+                            <input id="schoolMajor" class="input-text" type="text" readonly>
+                        </td>
+                        <td>院系</td>
+                        <td>
+                            <input id="schoolFaculty" class="input-text" type="text" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>特长</td>
-                    <td colspan="3"><input class="input-text" type="text" style="width: 98%; " ></td>
+                    <tr>
+                        <td>联系电话</td>
+                        <td colspan="3">
+                            <input id="phone" class="input-text" type="tel" style="width: 100%" readonly>
+                        </td>
+                    </tr>
 
-                </tr>
+                    <tr>
+                        <td>电子邮箱</td>
+                        <td colspan="3">
+                            <input id="email" class="input-text" type="email" style="width: 100%" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>家庭住址</td>
-                    <td colspan="3"><input class="input-text" type="text" style="width: 98%; " ></td>
-                </tr>
+                    <tr>
+                        <td>个性签名</td>
+                        <td colspan="3">
+                            <input id="description" class="input-text" type="text" style="width: 100%" readonly>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td colspan="4" align="right">
-                        <input class="input-btn" type="submit" value="编辑">
-                        <input class="input-btn" type="submit" value="保存">
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="4" style="height: 12px"></td>
+                    </tr>
 
-            </table>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <input class="input-btn" type="button" value="编辑" id="edit" onclick="pageGoto('edit')" style="margin-right:16px;">
+                            <input class="input-btn hidden" type="button" value="取消" id="cancel" onclick="pageGoto('cancel')" style="margin-right:16px;">
+                        </td>
+                        <td colspan="2" align="left">
+                            <input class="input-btn" type="button" value="回到主页面" id="back" onclick="pageGoto('back')" style="margin-left:16px;">
+                            <input class="input-btn hidden" type="button" value="保存" id="save" onclick="pageGoto('save')" style="margin-left:16px;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <input class="input-btn" type="button" value="登出" id="logout" onclick="loginoutCheck()">
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
 
         </div>
 

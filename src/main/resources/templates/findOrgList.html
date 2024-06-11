@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询组织信息</title>
+</head>
+<body>
+
+    <table border="1" align="center">
+        <tr>
+            <th>ID</th>
+            <th>组织名</th>
+            <th>组织类型类型</th>
+<!--            <th align="center">操作</th>-->
+        </tr>
+        <tr th:each="org:${orgList}">
+            <td th:text="${org.getId()}"></td>
+            <td th:text="${org.getName()}"></td>
+            <td th:text="${org.getType()}"></td>
+<!--            <td>-->
+<!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
+<!--            </td>-->
+        </tr>
+    </table>
+
+</body>
+</html>

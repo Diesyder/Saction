@@ -32,20 +32,5 @@
         <a  role="button" th:href="@{/toindex}">返回首页</a>
     </div>
 
-
-    <table border="1">
-        <tr><!--列-->
-            <th>ID</th>
-            <th>账号</th>
-            <th>密码</th>
-            <th>操作</th>
-        </tr>
-        <tr th:each="user:${userList}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getAccount()}"></td>
-            <td th:text="${user.getPassword()}"></td>
-        </tr>
-    </table>
-
 </body>
 </html>

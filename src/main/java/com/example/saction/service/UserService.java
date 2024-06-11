@@ -26,6 +26,9 @@ public class UserService {
     public int updateUser(User user) {
         return userMapper.updateUser(user);
     }
+    public int updateUserInfo(User user) {
+        return userMapper.updateUserInfo(user);
+    }
 
     //增
     public int addUser(String account, String password) {
@@ -43,6 +46,9 @@ public class UserService {
     }
     public User loginIn(String account, String password) {
         return userMapper.findUserByAccountAndPassword(account, password);
+    }
+    public User loginIn(int id) {
+        return userMapper.findUserById(id);
     }
 
     //注册

@@ -32,6 +32,7 @@ function loginoutCheck() {
             console.log(resp);
             toastrInit();
             if (resp.data != null) {
+                localStorage.removeItem('selection');
                 toastr.success("登出成功");
                 // 1秒后刷新页面
                 setTimeout(function() {
@@ -52,5 +53,9 @@ function loginoutCheck() {
         .catch(error => {
             console.error("请求出错：", error);
         });
-
 }
+
+// 异步用的延迟方式
+// function delay(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }

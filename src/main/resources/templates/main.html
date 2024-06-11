@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,28 +21,34 @@
 <body>
     <div>
 
+        <!--顶部栏-->
+        <div class="div-top-bg"></div>
         <div class="div-top">
-            <table align="center" style="height: 75px">
+            <table align="left" style="padding-left: 10%; height: 75px; weight: 200px">
                 <tr>
-                    <td style="width: 10%; margin: auto;">
+                    <td style="width: 75px">
                         <img src="image/logo.png" class="img-logo">
                     </td>
-                    <td style="width: 30%">
+                    <td style="width: 100px" align="left">
                         <h2>大学生活动管理系统</h2>
                     </td>
-                    <td style="width: 40%">
-
+                </tr>
+            </table>
+        </div>
+        <div class="div-top">
+            <table align="right" style="padding-right: 10%; height: 75px">
+                <tr>
+                    <td style="width: 75px">
+                        <a th:href="@{/login}">用户(<span th:text="${#session.getAttribute('nameNick')}"></span>)</a>
                     </td>
-                    <td style="width: 10%">
-                        <a th:href="@{/login}">用户(<span th:text="${#session.getAttribute('accountShow')}"></span>)</a>
-                    </td>
-                    <td style="width: 10%" th:if="${#session.getAttribute('accountShow') != '未登录' }">
+                    <td style="width: 75px" th:if="${#session.getAttribute('accountShow') != '未登录' }">
                         <a onclick="loginoutCheck()">登出</a>
                     </td>
                 </tr>
             </table>
         </div>
 
+        <!--左侧栏-->
         <div class="div-left">
 
             <div class="div-headImage">
@@ -51,48 +57,171 @@
 
             <div class="div-leftMenu" style="margin-top: unset">
                 <ul>
-                    <li><button class="btn-collapsible btn-select" id="btn-0" onclick="pageGoto('0')">活动列表</button></li>
-                    <li th:if="${#session.getAttribute('showBtn-1')}"><button class="btn-collapsible" id="btn-1" onclick="pageGoto('1')">活动管理</button></li>
-                    <li th:if="${#session.getAttribute('showBtn-2')}"><button class="btn-collapsible" id="btn-2" onclick="pageGoto('2')">我的活动</button></li>
-                    <li><button class="btn-collapsible" id="btn-3" onclick="pageGoto('3')">学生组织</button></li>
-                    <li th:if="${#session.getAttribute('showBtn-4')}"><button class="btn-collapsible" id="btn-4" onclick="pageGoto('4')">组织管理</button></li>
-                    <li th:if="${#session.getAttribute('showBtn-5')}"><button class="btn-collapsible" id="btn-5" onclick="pageGoto('5')">我的组织</button></li>
+                    <li><button class="btn-collapsible btn-select" id="btn-0" onclick="pageGoto(0)">活动列表</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-1')}"><button class="btn-collapsible" id="btn-1" onclick="pageGoto(1)">活动管理</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-2')}"><button class="btn-collapsible" id="btn-2" onclick="pageGoto(2)">我的活动</button></li>
+                    <li><button class="btn-collapsible" id="btn-3" onclick="pageGoto(3)">学生组织</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-4')}"><button class="btn-collapsible" id="btn-4" onclick="pageGoto(4)">组织管理</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-5')}"><button class="btn-collapsible" id="btn-5" onclick="pageGoto(5)">我的组织</button></li>
+                    <li th:if="${#session.getAttribute('showBtn-6')}"><button class="btn-collapsible" id="btn-6" onclick="pageGoto(6)">用户管理</button></li>
                 </ul>
             </div>
 
         </div>
 
+        <!--右侧栏-->
         <div class="div-right">
 
             <main>
                 <!-- 活动列表 -->
                 <section id="activities" class="show">
                     <h1>活动列表</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th class="column-center">ID</th>
+                            <th>活动名</th>
+                            <th>活动类型</th>
+                            <th class="column-center">操作</th>
+                        </tr>
+                        <tr th:each="act:${actList}">
+                            <td th:text="${act.getId()}" class="column-center"></td>
+                            <td th:text="${act.getName()}"></td>
+                            <td th:text="${act.getType()}"></td>
+                            <td class="column-center">查看
+                                <!--                                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
+                            </td>
+                        </tr>
+                    </table>
+
                 </section>
 
                 <!-- 活动管理 -->
                 <section id="activitiesManage" class="hidden">
+
                     <h1>活动管理</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th class="column-center">ID</th>
+                            <th>活动名</th>
+                            <th>活动类型</th>
+                            <th class="column-center">操作</th>
+                        </tr>
+                        <tr th:each="act:${actList}">
+                            <td th:text="${act.getId()}"  class="column-center"></td>
+                            <td th:text="${act.getName()}"></td>
+                            <td th:text="${act.getType()}"></td>
+                            <td class="column-center">删除
+<!--                                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="column-center">
+                                <a role="button" th:href="@{/act/findActList}" target="_blank">查看详细</a>
+                            </td>
+                        </tr>
+                    </table>
+
                 </section>
 
                 <!-- 我的活动 -->
-                <section id="MyActivities" class="hidden">
+                <section id="myActivities" class="hidden">
+
                     <h1>我的活动</h1>
+
                 </section>
 
                 <!-- 学生组织 -->
                 <section id="organizations" class="hidden">
+
                     <h1>学生组织</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th class="column-center">ID</th>
+                            <th>组织名</th>
+                            <th>组织类型类型</th>
+                            <th class="column-center">操作</th>
+                        </tr>
+                        <tr th:each="org:${orgList}">
+                            <td th:text="${org.getId()}" class="column-center"></td>
+                            <td th:text="${org.getName()}"></td>
+                            <td th:text="${org.getType()}"></td>
+                            <td class="column-center">查看
+                                <!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
+                            </td>
+                    </table>
+
                 </section>
 
                 <!-- 组织管理 -->
                 <section id="organizationsManage" class="hidden">
+
                     <h1>组织管理</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th class="column-center">ID</th>
+                            <th>组织名</th>
+                            <th>组织类型类型</th>
+                            <th class="column-center">操作</th>
+                        </tr>
+                        <tr th:each="org:${orgList}">
+                            <td th:text="${org.getId()}" class="column-center"></td>
+                            <td th:text="${org.getName()}"></td>
+                            <td th:text="${org.getType()}"></td>
+                            <td class="column-center">删除
+                            <!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="column-center">
+                                <a role="button" th:href="@{/org/findOrgList}" target="_blank">查看详细</a>
+                            </td>
+                        </tr>
+                    </table>
+
                 </section>
 
                 <!-- 我的组织 -->
-                <section id="MyOrganizations" class="hidden">
+                <section id="myOrganizations" class="hidden">
+
                     <h1>我的组织</h1>
+
+                </section>
+
+                <!-- 用户管理 -->
+                <section id="userManage" class="hidden">
+
+                    <h1>用户管理</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th class="column-center">ID</th>
+                            <th>账号</th>
+                            <th>密码</th>
+                            <th>昵称</th>
+                            <th class="column-center">权限</th>
+                            <th class="column-center">操作</th>
+                        </tr>
+                        <tr th:each="user:${userList}">
+                            <td th:text="${user.getId()}" class="column-center"></td>
+                            <td th:text="${user.getAccount()}"></td>
+                            <td th:text="${user.getPassword()}"></td>
+                            <td th:text="${user.getNameNick()}"></td>
+                            <td th:text="${user.getPriority()}" class="column-center"></td>
+                            <td class="column-center">
+                                <a role="button" th:href="@{/user/toDeleteUser/__${#numbers.formatInteger(user.getId(), 10)}__}">删除</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="column-center">
+                                <a role="button" th:href="@{/user/findUserList}" target="_blank">查看详细</a>
+                            </td>
+                        </tr>
+                    </table>
+
                 </section>
 
             </main>

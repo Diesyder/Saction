@@ -3,8 +3,8 @@
 	text-align: center; /*让div内部文字居中*/
 	/*background-color: #fff;*/ /*测试用*/
 	/*border-radius: 20px;*/
-	width: 640px;
-	height: 640px;
+	width: 1080px;
+	height: 720px;
 	/*margin-left: auto;*/
 	/*margin-right: auto;*/
 	/*margin-top: 10%;*/
@@ -19,7 +19,8 @@
 
 .head-div {
 	margin: auto;
-	width: 500px;
+	padding-top: 20px;
+	width: 640px;
 	height: 100px;
 	text-align: center;
 	/*border: 1px solid #444;*/
@@ -28,30 +29,19 @@
 	background-size: 100px 100px;
 }
 
-/*.sign-div {*/
-/*	margin: auto;*/
-/*	width: 500px;*/
-/*	height: 300px;*/
-/*	text-align: center;*/
-/*	outline: none;*/
-/*	border: 1px solid rgb(94, 92, 233);*/
-/*	border-radius: 10px;*/
-/*	!*border-radius: 8px;*!*/
-/*	background-color: rgba(172, 235, 243, .2);*/
-/*	box-sizing: border-box;*/
-/*}*/
-
-.sign-div {
+.div-information {
 	margin: auto;
-	width: 500px;
-	height: 362px;
+	width: 720px;
+	height: 560px;
 	text-align: center;
 	outline: none;
 	border: 1px solid rgb(94, 92, 233);
 	border-radius: 10px;
-	/*border-radius: 8px;*/
 	background-color: rgba(172, 235, 243, .2);
 	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .sign-div h1 {
@@ -59,9 +49,9 @@
 	color: rgb(29, 26, 26);
 }
 
-input:not([type="radio"]):not([type="checkbox"]) {
+input:not([type="radio"]):not([type="checkbox"]):not([type="button"]) {
 	width: 260px;
-	height: 42px;
+	height: 30px;
 	border: none;
 	/* 元素周围的轮廓无效 */
 	outline: none;
@@ -69,6 +59,15 @@ input:not([type="radio"]):not([type="checkbox"]) {
 	box-sizing: border-box;
 	/* display: block; */
 	padding: 0 16px;
+}
+
+table {
+	/*margin: auto;*/
+	vertical-align: middle;
+}
+
+td {
+	height: 38px;
 }
 
 select {
@@ -88,6 +87,15 @@ select {
 	margin: 5px auto;
 	transition: 0.5s;
 	border-radius: 16px;
+	background-color: rgb(223, 223, 223);
+}
+
+/*.input-readonly {*/
+/*	background-color: #cccccc;*/
+/*}*/
+
+.input-edit {
+	background-color: rgb(255, 255, 255);
 }
 
 .input-text:hover {
@@ -96,34 +104,39 @@ select {
 	border-radius: 4px;
 }
 
+.input-radio {
+	height: 20px;
+	width: 20px;
+}
+
 .input-btn {
-	margin: 20px auto 10px;
-	width: 160px;
-	font-size: medium;
-	border-radius: 28px;
-	cursor: pointer;
+	/*border: 0.5px solid rgb(73, 73, 133);*/
+	/*margin: 5px auto;*/
+	/*transition: 0.5s;*/
+	/*border-radius: 16px;*/
+	margin: 5px auto;
+	height: 35px;
+	width: 150px;
+	border-radius: 16px;
 	transition: 0.5s;
 	background-color: rgba(84, 175, 249, 0.8);
 }
 
 .input-btn:hover {
 	color: #fff;
-	width: 180px;
-	font-size: x-large;
-	border-radius: 12px;
 	transition: 0.5s;
 	background-color: rgba(10, 138, 243, 0.8);
 }
 
 .input-btn-text {
 	height: 25px;
-	width: 100px;
+	width: 150px;
 	/*text-size-adjust: auto;*/
 	/*margin: 30px auto 20px;*/
 	/*width: 150px;*/
 	background: transparent; /*按钮背景透明*/
 	border-width: 0;	/*边框透明*/
-	outline:none;	/*点击后没边框*/
+	outline: none;	/*点击后没边框*/
 	transition: 0.5s;
 	font-size: small;
 	text-decoration-color: gray;
@@ -141,7 +154,6 @@ select {
 	transition: 0.5s;
 	font-size: smaller;
 	text-decoration-color: black;
-	border-radius: 8px;
 }
 
 .sign-div a {

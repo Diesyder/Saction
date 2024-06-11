@@ -19,6 +19,8 @@ public class User {
     private String schoolMajor; // 专业
     private String schoolFaculty; // 院系
     private String description; // 个人描述
+    private String email; // 邮箱
+    private String phone; // 电话
     private String gender; // 性别
     private Long timeLoginLast; // 最后登录时间戳
     private String ipLoginLast; // 最后登录的ip地址

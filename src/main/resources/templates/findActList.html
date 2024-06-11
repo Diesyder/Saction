@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询活动信息</title>
+</head>
+<body>
+
+    <table border="1" align="center">
+        <tr>
+            <th>ID</th>
+            <th>活动名</th>
+            <th>活动类型</th>
+<!--            <th align="center">操作</th>-->
+        </tr>
+        <tr th:each="act:${actList}">
+            <td th:text="${act.getId()}"></td>
+            <td th:text="${act.getName()}"></td>
+            <td th:text="${act.getType()}"></td>
+<!--            <td>-->
+<!--                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
+<!--            </td>-->
+        </tr>
+    </table>
+
+</body>
+</html>

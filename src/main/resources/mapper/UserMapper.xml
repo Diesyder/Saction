@@ -49,4 +49,20 @@
         update user set nameReal = #{nameReal} where account = #{account}
     </update>
 
+    <update id="updateUserInfo">
+        update user set
+            account = #{user.account},
+            nameNick = #{user.nameNick},
+            nameReal = #{user.nameReal},
+            schoolId = #{user.schoolId},
+            schoolClass = #{user.schoolClass},
+            schoolMajor = #{user.schoolMajor},
+            schoolFaculty = #{user.schoolFaculty},
+            phone = #{user.phone},
+            email = #{user.email},
+            description = #{user.description},
+            gender = #{user.gender}
+        where id = #{user.id}
+    </update>
+
 </mapper>

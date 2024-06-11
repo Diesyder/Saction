@@ -4,6 +4,8 @@ import com.example.saction.pojo.User;
 import com.example.saction.service.UserService;
 import com.example.saction.utils.Result;
 import com.example.saction.utils.Verify;
+import com.fasterxml.jackson.databind.DatabindException;
+import org.springframework.jmx.export.notification.UnableToSendNotificationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.io.OutputStream;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
@@ -26,16 +30,6 @@ public class UserController {
 
     @Resource
     UserService userService;
-
-    //查询所有页面
-    @GetMapping("/findUserList")
-    public String findStudentList(Model model) {
-        List<User> userList=userService.findAllUser();
-        //传进去的是一个键值对
-        model.addAttribute("userList",userList);//传进前端的东西
-        //返回值==html文件名
-        return "findUserList";
-    }
 
     // 登录验证
     @PostMapping("/loginCheck")
@@ -49,6 +43,7 @@ public class UserController {
         // 查找account对应的数据行
         User userExist = userService.loginIn(account);
         User userRight = userService.loginIn(account, password);
+        // 密码账号是否匹配
         if (userExist != null && userRight != null) {
             // 判断验证码
             String imageCode = (String) session.getAttribute("imageCode");
@@ -65,7 +60,6 @@ public class UserController {
             }
             userService.updateUserTrack(account, ipAddress, System.currentTimeMillis());
             // 将该账户存入session
-            // HttpSession session = request.getSession();
             session.setAttribute("accountCurrent", account);
             return Result.success(userRight,"登录成功！");
         }
@@ -78,6 +72,7 @@ public class UserController {
         return Result.error("003","未知错误！");
     }
 
+    // 获取验证码
     @GetMapping("/getCode")
     @ResponseBody
     public void getCode(HttpServletResponse response, HttpSession session) throws Exception {
@@ -141,4 +136,60 @@ public class UserController {
         return Result.success(user,"重置密码成功！");
     }
 
+    // 获取用户数据库
+    @PostMapping("/getUser")
+    @ResponseBody
+    public Result getUserController(HttpSession session, HttpServletRequest request) {
+        // 如果已登录则获取用户信息，如果未登录则返回消息
+        String accountLast = (String) session.getAttribute("accountCurrent");
+        if (accountLast != null) {
+            User userExist = userService.loginIn(accountLast);
+            return Result.success(userExist, "获取用户信息");
+        } else {
+            return Result.error("103", "当前无用户登录！");
+        }
+    }
+
+    // 更新用户个人信息
+    @PostMapping("/updateInfo")
+    @ResponseBody
+    public Result updateInfoController(
+            @RequestParam int id,
+            @RequestParam String account,
+            @RequestParam String nameNick,
+            @RequestParam String nameReal,
+            @RequestParam String schoolId,
+            @RequestParam String schoolClass,
+            @RequestParam String schoolMajor,
+            @RequestParam String schoolFaculty,
+            @RequestParam String phone,
+            @RequestParam String email,
+            @RequestParam String description,
+            @RequestParam String gender
+    ) {
+        // 查找id对应的数据行
+        User user = userService.loginIn(id);
+        if (user == null) {
+            return Result.error("005","该账号不存在！");
+        }
+        // 查找账号是否已经存在(不与其他账号同名但可与原账号同名)
+        User userTemp = userService.loginIn(account);
+        if (userTemp != null && !Objects.equals(account, user.getAccount())) {
+            return Result.error("006","该账号已存在！");
+        }
+        // 对user类进行修改后,传入数据库
+        user.setAccount(account);
+        user.setNameNick(nameNick);
+        user.setNameReal(nameReal);
+        user.setSchoolId(schoolId);
+        user.setSchoolClass(schoolClass);
+        user.setSchoolMajor(schoolMajor);
+        user.setSchoolFaculty(schoolFaculty);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setDescription(description);
+        user.setGender(gender);
+        userService.updateUserInfo(user);
+        return Result.success(user,"重置密码成功！");
+    }
 }
