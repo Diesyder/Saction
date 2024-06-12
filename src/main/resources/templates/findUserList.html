@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<!--/*@thymesVar id="student" type="com.example.saction.pojo.Student"*/-->
-<!--/*@thymesVar id="studentList" type="com.example.saction.controller"*/-->
 <head>
     <meta charset="UTF-8">
-    <title>查询用户信息</title>
+    <title>用户信息管理</title>
+    <!--JS-->
+    <script type="text/javascript" src="../js/global.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
 
-    <table border="1" align="center">
+    <h3>新增用户</h3>
+
+    <table border="1" align="center" style="width: 55%;">
+
+        <tr>
+            <th>账号</th>
+            <td><input type="text" id="account" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <th>密码</th>
+            <td><input type="text" id="password" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="创建用户" onclick="userOps('c', 0)">
+            </td>
+        </tr>
+
+    </table>
+
+    <h3>权限修改</h3>
+
+    <table border="1" align="center" style="width: 55%;">
+
+        <tr>
+            <th>ID</th>
+            <td><input type="text" id="id" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <th>需设置权限</th>
+            <td><input type="text" id="priority" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="修改权限" onclick="userOps('u', 0)">
+            </td>
+        </tr>
+
+    </table>
+
+    <h3>用户列表</h3>
+
+    <table border="1" align="center" style="width: 90%;">
 
         <tr>
             <th>ID</th>
@@ -16,9 +63,17 @@
             <th>密码</th>
             <th>昵称</th>
             <th>名字</th>
+            <th>学号</th>
+            <th>班级</th>
+            <th>专业</th>
+            <th>院系</th>
+            <th>邮箱</th>
+            <th>电话</th>
+            <th>性别</th>
             <th>权限级别</th>
             <th>最后登录时间</th>
             <th>最后登录IP</th>
+            <th>操作</th>
         </tr>
 
         <tr th:each="user:${userList}">
@@ -27,9 +82,23 @@
             <td th:text="${user.getPassword()}"></td>
             <td th:text="${user.getNameNick()}"></td>
             <td th:text="${user.getNameReal()}"></td>
+            <td th:text="${user.getSchoolId()}"></td>
+            <td th:text="${user.getSchoolClass()}"></td>
+            <td th:text="${user.getSchoolMajor()}"></td>
+            <td th:text="${user.getSchoolFaculty()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getPhone()}"></td>
+            <td>
+                <span th:if="${user.getGender()} == 'male'">男</span>
+                <span th:if="${user.getGender()} == 'female'">女</span>
+                <span th:if="${#strings.isEmpty(user.getGender()) or user.getGender() != 'male' and user.getGender() != 'female'}"></span>
+            </td>
             <td th:text="${user.getPriority()}"></td>
             <td th:text="${#dates.format(user.getTimeLoginLast(), 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${user.getIpLoginLast()}"></td>
+            <td>
+                <button th:attr="userid=${user.getId()}" onclick="userOps('d', this.getAttribute('userid'))">删除</button>
+            </td>
         </tr>
 
     </table>

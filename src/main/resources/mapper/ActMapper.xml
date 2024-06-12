@@ -9,4 +9,12 @@
         select * from activity
     </select>
 
+    <select id="findActById" resultType="com.example.saction.pojo.Activity">
+        select * from activity where id = #{id}
+    </select>
+
+    <delete id="deleteAct">
+        delete from activity where id = #{id}
+    </delete>
+
 </mapper>

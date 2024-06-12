@@ -136,6 +136,20 @@ public class UserController {
         return Result.success(user,"重置密码成功！");
     }
 
+    // 设置权限等级
+    @PostMapping("/updatePriority")
+    @ResponseBody
+    public Result resetController(@RequestParam int id, @RequestParam int priority) {
+        // 查找id对应的数据行
+        User user = userService.loginIn(id);
+        if (user == null) {
+            return Result.error("005","该账号不存在！");
+        }
+        user.setPriority(priority);
+        userService.updateUserPriority(user);
+        return Result.success(user,"设置权限等级成功！");
+    }
+
     // 获取用户数据库
     @PostMapping("/getUser")
     @ResponseBody
@@ -192,4 +206,17 @@ public class UserController {
         userService.updateUserInfo(user);
         return Result.success(user,"重置密码成功！");
     }
+
+    // 删除用户
+    @PostMapping("/deleteUser")
+    @ResponseBody
+    public Result deleteUser(@RequestParam int id) {
+        // 获取即将删除的用户对象
+        User user = userService.loginIn(id);
+        // 删除用户对象
+        userService.deleteUser(id);
+        // 返还信息
+        return Result.success(user, "返还删除的用户信息");
+    }
+
 }

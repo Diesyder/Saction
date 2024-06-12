@@ -13,12 +13,14 @@ public class ActService {
     @Autowired
     ActMapper actMapper;
 
-    //查
     public List<Activity> findAllAct() {
         return actMapper.findAllAct();
     }
-
-    public Activity findActById(int id) {
+    public Activity findAct(int id) {
         return actMapper.findActById(id);
     }
+    public int deleteAct(int id) {
+        return actMapper.deleteAct(id);
+    }
+
 }

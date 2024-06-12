@@ -2,24 +2,106 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>查询活动信息</title>
+    <title>活动信息管理</title>
+    <!--JS-->
+    <script type="text/javascript" src="../js/global.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
 
-    <table border="1" align="center">
+    <h3>将用户加入活动</h3>
+
+    <table border="1" align="center" style="width: 55%;">
+
+        <tr>
+            <th>用户ID</th>
+            <td><input type="text" id="userid" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <th>活动ID</th>
+            <td><input type="text" id="actid" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="加入活动" onclick="generalOps('joinAct', 0)">
+            </td>
+        </tr>
+
+    </table>
+
+    <h3>活动列表</h3>
+
+    <table border="1" align="center" style="width: 90%;">
         <tr>
             <th>ID</th>
             <th>活动名</th>
             <th>活动类型</th>
-<!--            <th align="center">操作</th>-->
+            <th>活动地点</th>
+            <th>报名开始时间</th>
+            <th>报名结束时间</th>
+            <th>活动开始时间</th>
+            <th>活动结束时间</th>
+            <th>当前报名人数</th>
+            <th>最大报名人数</th>
+            <th>需要签到</th>
+            <th>需要签退</th>
+            <th>操作</th>
         </tr>
         <tr th:each="act:${actList}">
             <td th:text="${act.getId()}"></td>
             <td th:text="${act.getName()}"></td>
             <td th:text="${act.getType()}"></td>
-<!--            <td>-->
-<!--                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
-<!--            </td>-->
+            <td th:text="${act.getActvenue()}"></td>
+            <td th:text="${#dates.format(act.getSignuptimeStart(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(act.getSignuptimeEnd(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(act.getActtimeStart(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(act.getActtimeEnd(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${act.getMemberCurrent()}"></td>
+            <td th:text="${act.getMemberMax()}"></td>
+            <td>
+                <span th:if="${act.getIsSigninNeed()} == '0'">否</span>
+                <span th:unless="${act.getIsSigninNeed()} == '0'">是</span>
+            </td>
+            <td>
+                <span th:if="${act.getIsSignoutNeed()} == '0'">否</span>
+                <span th:unless="${act.getIsSignoutNeed()} == '0'">是</span>
+            </td>
+            <td>
+                <button th:attr="actid=${act.getId()}" onclick="actOps('d', this.getAttribute('actid'))">删除</button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>加入活动事件列表</h3>
+
+    <table border="1" align="center" style="width: 90%;">
+        <tr>
+            <th>事件ID</th>
+            <th>用户ID</th>
+            <th>活动ID</th>
+            <th>加入时间</th>
+            <th>是否签到</th>
+            <th>是否签退</th>
+            <th align="center">操作</th>
+        </tr>
+        <tr th:each="ja:${jaList}">
+            <td th:text="${ja.getId()}"></td>
+            <td th:text="${ja.getUserid()}"></td>
+            <td th:text="${ja.getActid()}"></td>
+            <td th:text="${#dates.format(ja.getTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <span th:if="${ja.getIsSignin()} == '0'">否</span>
+                <span th:unless="${ja.getIsSignin()} == '0'">是</span>
+            </td>
+            <td>
+                <span th:if="${ja.getIsSignout()} == '0'">否</span>
+                <span th:unless="${ja.getIsSignout()} == '0'">是</span>
+            </td>
+            <td>
+                <button th:attr="jaid=${ja.getId()}" onclick="generalOps('joinAct-d', this.getAttribute('jaid'))">删除</button>
+            </td>
         </tr>
     </table>
 

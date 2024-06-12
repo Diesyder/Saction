@@ -10,5 +10,6 @@ import java.util.List;
 public interface ActMapper {
     //查
     List<Activity> findAllAct();
-    Activity findActById(@Param("id") int id); // 按照id找活动
+    Activity findActById(@Param("id") int id);
+    int deleteAct(@Param("id") int id);
 }

@@ -17,6 +17,7 @@ public interface UserMapper {
     //改
     int updateUser(@Param("id") User user);
     int updateUserInfo(@Param("user") User user);
+    int updateUserPriority(@Param("user") User user);
 
     //增
     int addUser(@Param("account") String account, @Param("password") String password);

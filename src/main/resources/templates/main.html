@@ -82,14 +82,16 @@
                             <th class="column-center">ID</th>
                             <th>活动名</th>
                             <th>活动类型</th>
+                            <th>活动地点</th>
                             <th class="column-center">操作</th>
                         </tr>
                         <tr th:each="act:${actList}">
                             <td th:text="${act.getId()}" class="column-center"></td>
                             <td th:text="${act.getName()}"></td>
                             <td th:text="${act.getType()}"></td>
-                            <td class="column-center">查看
-                                <!--                                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
+                            <td th:text="${act.getActvenue()}"></td>
+                            <td>
+                                <a role="button" th:href="@{/act/findAct/{id}(id=${act.getId()})}" target="_blank">查看</a>
                             </td>
                         </tr>
                     </table>
@@ -106,15 +108,13 @@
                             <th class="column-center">ID</th>
                             <th>活动名</th>
                             <th>活动类型</th>
-                            <th class="column-center">操作</th>
+                            <th>活动地点</th>
                         </tr>
                         <tr th:each="act:${actList}">
                             <td th:text="${act.getId()}"  class="column-center"></td>
                             <td th:text="${act.getName()}"></td>
                             <td th:text="${act.getType()}"></td>
-                            <td class="column-center">删除
-<!--                                <a role="button" th:href="@{/act/toDeleteAct/__${#numbers.formatInteger(actList.getId(), 10)}__}">删除</a>-->
-                            </td>
+                            <td th:text="${act.getActvenue()}"></td>
                         </tr>
                         <tr>
                             <td colspan="6" class="column-center">
@@ -129,6 +129,29 @@
                 <section id="myActivities" class="hidden">
 
                     <h1>我的活动</h1>
+
+                    <div th:if="${not #lists.isEmpty(myjaList)}">
+
+                        <table border="1" align="left" class="tableDisplay">
+                            <tr>
+                                <th class="column-center">参与的活动ID</th>
+                                <th class="column-center">参与的活动名称</th>
+                                <th class="column-center">操作</th>
+                            </tr>
+                            <tr th:each="myja:${myjaList}">
+                                <td th:text="${myja.getId()}" class="column-center"></td>
+                                <td th:text="${myja.getName()}" class="column-center"></td>
+                                <td class="column-center">退出组织</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div th:if="${#lists.isEmpty(myjaList)}">
+
+                        <p>您当前未参与任何活动</p>
+
+                    </div>
 
                 </section>
 
@@ -148,9 +171,10 @@
                             <td th:text="${org.getId()}" class="column-center"></td>
                             <td th:text="${org.getName()}"></td>
                             <td th:text="${org.getType()}"></td>
-                            <td class="column-center">查看
-                                <!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
+                            <td>
+                                <a role="button" th:href="@{/org/findOrg/{id}(id=${org.getId()})}" target="_blank">查看</a>
                             </td>
+                        </tr>
                     </table>
 
                 </section>
@@ -165,15 +189,11 @@
                             <th class="column-center">ID</th>
                             <th>组织名</th>
                             <th>组织类型类型</th>
-                            <th class="column-center">操作</th>
                         </tr>
                         <tr th:each="org:${orgList}">
                             <td th:text="${org.getId()}" class="column-center"></td>
                             <td th:text="${org.getName()}"></td>
                             <td th:text="${org.getType()}"></td>
-                            <td class="column-center">删除
-                            <!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
-                            </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="column-center">
@@ -189,6 +209,29 @@
 
                     <h1>我的组织</h1>
 
+                    <div th:if="${not #lists.isEmpty(myjoList)}">
+
+                        <table border="1" align="left" class="tableDisplay">
+                            <tr>
+                                <th class="column-center">参与的组织ID</th>
+                                <th class="column-center">参与的组织名称</th>
+                                <th class="column-center">操作</th>
+                            </tr>
+                            <tr th:each="myjo:${myjoList}">
+                                <td th:text="${myjo.getId()}" class="column-center"></td>
+                                <td th:text="${myjo.getName()}" class="column-center"></td>
+                                <td class="column-center">退出组织</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div th:if="${#lists.isEmpty(myjoList)}">
+
+                        <p>您当前未加入任何组织</p>
+
+                    </div>
+
                 </section>
 
                 <!-- 用户管理 -->
@@ -203,7 +246,6 @@
                             <th>密码</th>
                             <th>昵称</th>
                             <th class="column-center">权限</th>
-                            <th class="column-center">操作</th>
                         </tr>
                         <tr th:each="user:${userList}">
                             <td th:text="${user.getId()}" class="column-center"></td>
@@ -211,9 +253,6 @@
                             <td th:text="${user.getPassword()}"></td>
                             <td th:text="${user.getNameNick()}"></td>
                             <td th:text="${user.getPriority()}" class="column-center"></td>
-                            <td class="column-center">
-                                <a role="button" th:href="@{/user/toDeleteUser/__${#numbers.formatInteger(user.getId(), 10)}__}">删除</a>
-                            </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="column-center">

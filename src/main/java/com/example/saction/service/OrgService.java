@@ -13,8 +13,13 @@ public class OrgService {
     @Autowired
     OrgMapper orgMapper;
 
-    //查
     public List<Organization> findAllOrg() {
         return orgMapper.findAllOrg();
+    }
+    public Organization findOrg(int id) {
+        return orgMapper.findOrgById(id);
+    }
+    public int deleteOrg(int id) {
+        return orgMapper.deleteOrg(id);
     }
 }

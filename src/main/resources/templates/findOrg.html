@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询组织</title>
+    <!--JS-->
+    <script type="text/javascript" src="../js/global.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+    <table border="1" align="center" style="width: 75%;">
+        <tr>
+            <td width="10%">ID</td>
+            <td>
+                <input type="text" th:value="${org.getId()}" readonly style="width: 99%;">
+            </td>
+        </tr>
+        <tr>
+            <td>组织名称</td>
+            <td>
+                <input type="text" th:value="${org.getName()}" readonly style="width: 99%;">
+            </td>
+        </tr>
+        <tr>
+            <td>组织类型</td>
+            <td>
+                <input type="text" th:value="${org.getType()}" readonly style="width: 99%;">
+            </td>
+        </tr>
+        <tr>
+            <td>可申请加入</td>
+            <td>
+                <input type="text" th:value="${org.getIsJoinAllowed() == '0' ? '否' :
+                  (org.getIsJoinAllowed() == '1' ? '是' : '')}" readonly style="width: 99%;">
+            </td>
+        </tr>
+        <tr>
+            <td>描述</td>
+            <td>
+                <input type="text" th:value="${org.getDescription()}" readonly style="width: 99%;">
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

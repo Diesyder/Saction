@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JoinAct {
+public class JoinOrg {
     private int id; // 序号
     private int userid; // 用户id
-    private int actid; // 活动id
-    private Long time; // 报名时间
-    private String isSignin; // 是否签到
-    private String isSignout; // 是否签退
+    private int orgid; // 组织id
+    private Long time; // 加入时间
 }

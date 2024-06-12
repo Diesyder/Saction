@@ -13,6 +13,10 @@
         update user set account = #{user.account}, password = #{user.password} where id = #{user.id}
     </update>
 
+    <update id="updateUserPriority">
+        update user set priority = #{user.priority} where id = #{user.id}
+    </update>
+
     <delete id="deleteUser">
         delete from user where id = #{id}
     </delete>

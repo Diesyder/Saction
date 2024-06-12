@@ -2,24 +2,79 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>查询组织信息</title>
+    <title>组织信息管理</title>
+    <!--JS-->
+    <script type="text/javascript" src="../js/global.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
 
-    <table border="1" align="center">
+    <h3>将用户加入组织</h3>
+
+    <table border="1" align="center" style="width: 55%;">
+
+        <tr>
+            <th>用户ID</th>
+            <td><input type="text" id="userid" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <th>组织ID</th>
+            <td><input type="text" id="orgid" style="width: 99%;"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="加入组织" onclick="generalOps('joinOrg', 0)">
+            </td>
+        </tr>
+
+    </table>
+
+    <h3>组织列表</h3>
+
+    <table border="1" align="center" style="width: 90%;">
         <tr>
             <th>ID</th>
             <th>组织名</th>
-            <th>组织类型类型</th>
-<!--            <th align="center">操作</th>-->
+            <th>组织类型</th>
+            <th>可申请加入</th>
+            <th>描述</th>
+            <th align="center">操作</th>
         </tr>
         <tr th:each="org:${orgList}">
             <td th:text="${org.getId()}"></td>
             <td th:text="${org.getName()}"></td>
             <td th:text="${org.getType()}"></td>
-<!--            <td>-->
-<!--                <a role="button" th:href="@{/org/toDeleteOrg/__${#numbers.formatInteger(orgList.getId(), 10)}__}">删除</a>-->
-<!--            </td>-->
+            <td>
+                <span th:if="${org.getIsJoinAllowed()} == '0'">否</span>
+                <span th:unless="${org.getIsJoinAllowed()} == '0'">是</span>
+            </td>
+            <td th:text="${org.getDescription()}"></td>
+            <td>
+                <button th:attr="orgid=${org.getId()}" onclick="orgOps('d', this.getAttribute('orgid'))">删除</button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>加入组织事件列表</h3>
+
+    <table border="1" align="center" style="width: 90%;">
+        <tr>
+            <th>事件ID</th>
+            <th>用户ID</th>
+            <th>组织ID</th>
+            <th>加入时间</th>
+            <th align="center">操作</th>
+        </tr>
+        <tr th:each="jo:${joList}">
+            <td th:text="${jo.getId()}"></td>
+            <td th:text="${jo.getUserid()}"></td>
+            <td th:text="${jo.getOrgid()}"></td>
+            <td th:text="${#dates.format(jo.getTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <button th:attr="joid=${jo.getId()}" onclick="generalOps('joinOrg-d', this.getAttribute('joid'))">删除</button>
+            </td>
         </tr>
     </table>
 

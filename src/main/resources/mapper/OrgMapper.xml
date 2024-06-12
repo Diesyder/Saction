@@ -9,4 +9,12 @@
         select * from organization
     </select>
 
+    <select id="findOrgById" resultType="com.example.saction.pojo.Organization">
+        select * from organization where id = #{id}
+    </select>
+
+    <delete id="deleteOrg">
+        delete from organization where id = #{id}
+    </delete>
+
 </mapper>

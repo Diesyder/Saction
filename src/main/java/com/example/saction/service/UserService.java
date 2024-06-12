@@ -29,6 +29,9 @@ public class UserService {
     public int updateUserInfo(User user) {
         return userMapper.updateUserInfo(user);
     }
+    public int updateUserPriority(User user) {
+        return userMapper.updateUserPriority(user);
+    }
 
     //增
     public int addUser(String account, String password) {

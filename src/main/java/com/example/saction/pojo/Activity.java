@@ -19,6 +19,6 @@ public class Activity {
     private String description; // 描述
     private int memberCurrent; // 当前报名人数
     private int memberMax; // 最大报名人数
-    private int isSigninNeed; // 是否需要签到
-    private int isSignoutNeed; // 是否需要签退
+    private String isSigninNeed; // 是否需要签到
+    private String isSignoutNeed; // 是否需要签退
 }

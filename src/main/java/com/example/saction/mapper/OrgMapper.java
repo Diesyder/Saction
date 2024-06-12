@@ -8,6 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface OrgMapper {
-    //查
+
     List<Organization> findAllOrg();
+    Organization findOrgById(@Param("id") int id);
+    int deleteOrg(@Param("id") int id);
+
 }
