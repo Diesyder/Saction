@@ -310,6 +310,37 @@ function orgOps(ops, id) {
 // 活动操作
 function actOps(ops, id) {
     switch (ops) {
+        case 'r' :
+            let actid = document.getElementById("actId").value;
+            if (actid == null || actid == "") {
+                actid = -1;
+            }
+            fetch("/act/findActById", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `id=${encodeURIComponent(actid)}`
+            })
+                .then(response => response.json())
+                .then(resp => {
+                    console.log(resp);
+                    if (resp.data != null) {
+                        location.reload(); // 刷新页面
+                    }
+
+                    switch (resp.code) {
+                        case "101" :
+                            toastr.error("不存在此活动!", "查找失败");
+                            return;
+                        default:
+                            toastr.error("出现了未知错误!", "查找失败");
+                    }
+                })
+                .catch(error => {
+                    console.error("请求出错：", error);
+                });
+            return;
         case 'd' :
             fetch("/act/deleteAct", {
                 method: "POST",

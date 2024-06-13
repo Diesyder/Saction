@@ -60,7 +60,7 @@
                     <li><button class="btn-collapsible btn-select" id="btn-0" onclick="pageGoto(0)">活动列表</button></li>
                     <li th:if="${#session.getAttribute('showBtn-1')}"><button class="btn-collapsible" id="btn-1" onclick="pageGoto(1)">活动管理</button></li>
                     <li th:if="${#session.getAttribute('showBtn-2')}"><button class="btn-collapsible" id="btn-2" onclick="pageGoto(2)">我的活动</button></li>
-                    <li><button class="btn-collapsible" id="btn-3" onclick="pageGoto(3)">学生组织</button></li>
+                    <li><button class="btn-collapsible" id="btn-3" onclick="pageGoto(3)">组织列表</button></li>
                     <li th:if="${#session.getAttribute('showBtn-4')}"><button class="btn-collapsible" id="btn-4" onclick="pageGoto(4)">组织管理</button></li>
                     <li th:if="${#session.getAttribute('showBtn-5')}"><button class="btn-collapsible" id="btn-5" onclick="pageGoto(5)">我的组织</button></li>
                     <li th:if="${#session.getAttribute('showBtn-6')}"><button class="btn-collapsible" id="btn-6" onclick="pageGoto(6)">用户管理</button></li>
@@ -75,7 +75,25 @@
             <main>
                 <!-- 活动列表 -->
                 <section id="activities" class="show">
+
                     <h1>活动列表</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th colspan="3">查找活动</th>
+                        </tr>
+                        <tr>
+                            <td width="80px" align="center">活动ID:</td>
+                            <td>
+                                <input type="text" id="actId" style="width: 100%; height:21px;">
+                            </td>
+                            <td class="column-center">
+                                <a role="button" onclick="actOps('r', 0)">查找</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br><br><br>
 
                     <table border="1" align="left" class="tableDisplay">
                         <tr>
@@ -90,7 +108,7 @@
                             <td th:text="${act.getName()}"></td>
                             <td th:text="${act.getType()}"></td>
                             <td th:text="${act.getActvenue()}"></td>
-                            <td>
+                            <td class="column-center">
                                 <a role="button" th:href="@{/act/findAct/{id}(id=${act.getId()})}" target="_blank">查看</a>
                             </td>
                         </tr>
@@ -136,11 +154,14 @@
                             <tr>
                                 <th class="column-center">参与的活动ID</th>
                                 <th class="column-center">参与的活动名称</th>
-                                <th class="column-center">操作</th>
+                                <th class="column-center" colspan="2">操作</th>
                             </tr>
                             <tr th:each="myja:${myjaList}">
                                 <td th:text="${myja.getId()}" class="column-center"></td>
                                 <td th:text="${myja.getName()}" class="column-center"></td>
+                                <td class="column-center">
+                                    <a role="button" th:href="@{/act/findAct/{id}(id=${myja.getId()})}" target="_blank">查看</a>
+                                </td>
                                 <td class="column-center">退出组织</td>
                             </tr>
                         </table>
@@ -155,23 +176,23 @@
 
                 </section>
 
-                <!-- 学生组织 -->
+                <!-- 组织列表 -->
                 <section id="organizations" class="hidden">
 
-                    <h1>学生组织</h1>
+                    <h1>组织列表</h1>
 
                     <table border="1" align="left" class="tableDisplay">
                         <tr>
                             <th class="column-center">ID</th>
                             <th>组织名</th>
-                            <th>组织类型类型</th>
+                            <th>组织类型</th>
                             <th class="column-center">操作</th>
                         </tr>
                         <tr th:each="org:${orgList}">
                             <td th:text="${org.getId()}" class="column-center"></td>
                             <td th:text="${org.getName()}"></td>
                             <td th:text="${org.getType()}"></td>
-                            <td>
+                            <td class="column-center">
                                 <a role="button" th:href="@{/org/findOrg/{id}(id=${org.getId()})}" target="_blank">查看</a>
                             </td>
                         </tr>
@@ -188,7 +209,7 @@
                         <tr>
                             <th class="column-center">ID</th>
                             <th>组织名</th>
-                            <th>组织类型类型</th>
+                            <th>组织类型</th>
                         </tr>
                         <tr th:each="org:${orgList}">
                             <td th:text="${org.getId()}" class="column-center"></td>
@@ -215,11 +236,14 @@
                             <tr>
                                 <th class="column-center">参与的组织ID</th>
                                 <th class="column-center">参与的组织名称</th>
-                                <th class="column-center">操作</th>
+                                <th class="column-center" colspan="2">操作</th>
                             </tr>
                             <tr th:each="myjo:${myjoList}">
                                 <td th:text="${myjo.getId()}" class="column-center"></td>
                                 <td th:text="${myjo.getName()}" class="column-center"></td>
+                                <td class="column-center">
+                                    <a role="button" th:href="@{/org/findOrg/{id}(id=${myjo.getId()})}" target="_blank">查看</a>
+                                </td>
                                 <td class="column-center">退出组织</td>
                             </tr>
                         </table>

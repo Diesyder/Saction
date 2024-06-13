@@ -57,6 +57,24 @@ public class pageController {
         return "findAct";
     }
 
+    @PostMapping("act/findActById")
+    @ResponseBody
+    public Result findActById(@RequestParam int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (id == -1) {
+            if (session.getAttribute("actid") != null) {
+                session.removeAttribute("actid");
+            }
+            return Result.success(id, "返回默认状态");
+        }
+        Activity act = actService.findAct(id);
+        if(act == null) {
+            return Result.error("101", "不存在此活动");
+        }
+        session.setAttribute("actid", id);
+        return Result.success(act, "返还查找的活动信息");
+    }
+
     // 前往查询所有组织的页面
     @GetMapping("org/findOrgList")
     public String findOrgList(Model model) {
@@ -69,7 +87,7 @@ public class pageController {
 
     // 前往查询某个组织的页面
     @GetMapping("org/findOrg/{id}")
-    public String findOrg(@PathVariable("id") int id, Model model) {
+    public String findOrgById(@PathVariable("id") int id, Model model) {
         Organization org = orgService.findOrg(id);
         model.addAttribute("org", org);
         return "findOrg";
@@ -104,8 +122,20 @@ public class pageController {
         // 获取数据库内容
         List<User> userList = userService.findAllUser();
         model.addAttribute("userList", userList);
+        // 活动
         List<Activity> actList = actService.findAllAct();
+        if (session.getAttribute("actid") != null) {
+            List<Activity> actListById = new ArrayList<>();
+            for (Activity x : actList) {
+                if (x.getId() == (int) session.getAttribute("actid")) {
+                    actListById.add(x);
+                    break;
+                }
+            }
+            actList = actListById;
+        }
         model.addAttribute("actList", actList);
+        // 组织
         List<Organization> orgList = orgService.findAllOrg();
         model.addAttribute("orgList", orgList);
         if (userTemp != null) {
