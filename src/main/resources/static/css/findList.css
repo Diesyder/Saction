@@ -1,0 +1,45 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    /*background-image: url('../image/grassland.jpg');*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+table {
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align-all: center;
+    font-size: medium;
+    border: 2px solid rgb(51, 51, 51);
+}
+
+input[type="text"] {
+    font-size: medium;
+    background: transparent;
+}
+
+.column-center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr {
+    padding: 4px;
+    border: 1px solid #000000; /* 设置边框颜色 */
+    border-radius: 10px;
+}
+
+td {
+    padding: 4px;
+    border: 1px solid #000000; /* 设置边框颜色 */
+    border-radius: 10px;
+    text-align: center;
+    align-content: center;
+    white-space: nowrap; /* 确保内容不换行 */
+    overflow: hidden; /* 隐藏超出单元格的内容 */
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+}

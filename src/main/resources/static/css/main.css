@@ -18,6 +18,16 @@ ul {
     font-family: Arial, sans-serif;
 }
 
+tr {
+    padding: 4px;
+    border-radius: 10px;
+}
+
+td {
+    padding: 4px;
+    border-radius: 10px;
+}
+
 .column-center {
     text-align: center;
     vertical-align: middle;
@@ -48,6 +58,7 @@ section {
 }
 
 td {
+    text-align: center;
     white-space: nowrap; /* 确保内容不换行 */
     overflow: hidden; /* 隐藏超出单元格的内容 */
     text-overflow: ellipsis; /* 超出部分显示省略号 */

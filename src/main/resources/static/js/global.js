@@ -334,7 +334,7 @@ function actOps(ops, id) {
                             toastr.error("不存在此活动!", "查找失败");
                             return;
                         default:
-                            toastr.error("出现了未知错误!", "查找失败");
+                            toastr.error("请输入正确的值!", "查找失败");
                     }
                 })
                 .catch(error => {
