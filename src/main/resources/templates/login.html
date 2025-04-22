@@ -10,12 +10,15 @@
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--JS-->
     <script type="text/javascript" src="js/global.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--toastr-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 
 </head>
 
@@ -27,12 +30,27 @@
 <!--    <a th:href="@{/act/findActList}" target="_blank">[调试]活动信息</a><br>-->
 <!--    <a th:href="@{/org/findOrgList}" target="_blank">[调试]组织信息</a><br>-->
 
+    <!--顶部栏-->
+    <div class="div-top-bg"></div>
+    <div class="div-top">
+        <table align="left" style="padding-left: 10%; height: 75px; weight: 200px">
+            <tr>
+                <!--                    <td style="width: 75px">-->
+                <!--                        <img src="image/logo.png" class="img-logo">-->
+                <!--                    </td>-->
+                <td style="width: 100px" align="left">
+                    <h2>智能人员与活动管理系统</h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <!--用户登录界面-->
     <div class="div">
 
         <!--界面标题-->
         <div class="head-div">
-            <h1>大学生活动管理系统</h1>
+            <h1>欢迎</h1>
         </div>
 
         <!--登录界面-->

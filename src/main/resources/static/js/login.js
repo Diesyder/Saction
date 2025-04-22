@@ -82,21 +82,38 @@ function registerCheck() {
     const act = document.getElementById("userAccountRegister").value;
     const pwd = document.getElementById("userPasswordRegister").value;
     const pwdConfirm = document.getElementById("userPasswordRegisterConfirm").value;
-    // 判断账号密码是否为空
+    // 判断账号是否为空
     if (act == null || act === "") {
         toastr.info("请输入账号");
         return;
     }
+    // 判断密码是否为空
     if (pwd == null || pwd === "") {
         toastr.info("请输入密码");
         return;
     }
+    // 定义密码验证规则
+    const minLength = 6; // 最小长度
+    // 检查密码长度
+    if (pwd.length < minLength) {
+        toastr.warning("密码至少包含6个字符！", "警告");
+        return;
+    }
+    // 正则表达式
+    const regexPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    // 检查密码是否包含英文字母和数字
+    if (!regexPattern.test(pwd)) {
+        toastr.warning("密码需由英文字母与数字组成！", "警告");
+        return;
+    }
+    // 判断确认密码是否为空
     if (pwdConfirm == null || pwdConfirm === "") {
         toastr.info("请再次输入密码");
         return;
     }
+    // 判断两次输入密码是否相同
     if (pwd !== pwdConfirm) {
-        toastr.warning("你两次输入的密码不同!", "警告");
+        toastr.warning("你两次输入的密码不同！", "警告");
         return;
     }
     // 调用注册接口
