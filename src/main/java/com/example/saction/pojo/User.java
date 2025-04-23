@@ -4,10 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 序号
     private String account; // 账号
     private String password; // 密码
@@ -23,5 +31,5 @@ public class User {
     private String phone; // 电话
     private String gender; // 性别
     private Long timeLoginLast; // 最后登录时间戳
-    private String ipLoginLast; // 最后登录的ip地址
+    private String ipLoginLast; // 最后登录的ip地址// Getters and Setters
 }

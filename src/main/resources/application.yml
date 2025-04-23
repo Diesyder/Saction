@@ -5,11 +5,18 @@ spring:
     password: Ljc212090311
     url: jdbc:mysql://localhost:3306/studentsaction?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
 #配置Mybatis映射路径
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.example.StudentDemo.pojo
+  type-aliases-package: com.example.saction.pojo
 
 #配置端口
 server:

@@ -29,7 +29,7 @@ function getInfo() {
                 }
                 document.getElementById("schoolClass").value = resp.data.schoolClass;
                 document.getElementById("schoolMajor").value = resp.data.schoolMajor;
-                document.getElementById("schoolFaculty").value = resp.data.schoolFaculty;
+                // document.getElementById("schoolFaculty").value = resp.data.schoolFaculty;
                 document.getElementById("phone").value = resp.data.phone;
                 document.getElementById("email").value = resp.data.email;
                 document.getElementById("description").value = resp.data.description;
@@ -51,7 +51,6 @@ function pageGoto(where) {
         "schoolId",
         "schoolClass",
         "schoolMajor",
-        "schoolFaculty",
         "phone",
         "email",
         "description"

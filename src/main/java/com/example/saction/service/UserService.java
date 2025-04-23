@@ -2,6 +2,7 @@ package com.example.saction.service;
 
 import com.example.saction.mapper.UserMapper;
 import com.example.saction.pojo.User;
+import com.example.saction.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class UserService {
     }
 
     public User findUserById(int id) {
-        return userMapper.findUserById(id);
+        return userMapper.getUserById(id);
     }
 
     //改
@@ -51,7 +52,7 @@ public class UserService {
         return userMapper.findUserByAccountAndPassword(account, password);
     }
     public User loginIn(int id) {
-        return userMapper.findUserById(id);
+        return userMapper.getUserById(id);
     }
 
     //注册

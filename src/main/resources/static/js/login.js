@@ -31,9 +31,7 @@ function loginCheck() {
     // 调用登录接口
     fetch("/user/loginCheck", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `account=${encodeURIComponent(act)}&password=${encodeURIComponent(pwd)}&captcha=${encodeURIComponent(cpc)}`
     })
         .then(response => response.json())
