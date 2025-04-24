@@ -23,7 +23,9 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -86,3 +88,31 @@ public class ServiceController {
     }
 
 }
+//// 生成推荐列表
+//public List<Integer> generateRecommendations(int targetUserId, int topN, User userItemRatings, User userSimilarities) {
+//    Map<Integer, Double> itemScores = new HashMap<>();
+//    Map<Integer, Double> targetRatings = userItemRatings.get(targetUserId);
+//
+//    // 遍历相似用户
+//    for (Map.Entry<Integer, Double> entry : userSimilarities.get(targetUserId).entrySet()) {
+//        int similarUser = entry.getKey();
+//        double similarity = entry.getValue();
+//
+//        // 遍历相似用户评分过的物品
+//        for (Map.Entry<Integer, Double> ratingEntry : userItemRatings.get(similarUser).entrySet()) {
+//            int item = ratingEntry.getKey();
+//            double rating = ratingEntry.getValue();
+//
+//            // 排除目标用户已评分的物品
+//            if (!targetRatings.containsKey(item)) {
+//                itemScores.put(item, itemScores.getOrDefault(item, 0.0) + similarity * rating);
+//            }
+//        }
+//    }
+//    // 按得分排序并返回TopN
+//    return itemScores.entrySet().stream()
+//            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+//            .limit(topN)
+//            .map(Map.Entry::getKey)
+//            .collect(Collectors.toList());
+//}
