@@ -9,6 +9,7 @@
         <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/global.css">
         <link rel="stylesheet" type="text/css" href="css/user.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
         <!--JS-->
         <script type="text/javascript" src="js/global.js"></script>
@@ -19,7 +20,20 @@
 
     <body>
 
-<!--        <a th:href="@{/user/findUserList}">[调试]用户信息</a><br>-->
+        <!--顶部栏-->
+        <div class="div-top-bg"></div>
+        <div class="div-top">
+            <table align="left" style="padding-left: 10%; height: 75px; weight: 200px">
+                <tr>
+                    <!--                    <td style="width: 75px">-->
+                    <!--                        <img src="image/logo.png" class="img-logo">-->
+                    <!--                    </td>-->
+                    <td style="width: 100px" align="left">
+                        <h2>智能人员与活动管理系统</h2>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
         <!--用户信息界面-->
         <div class="div">
@@ -30,68 +44,47 @@
 
                 <table align="center" valign="middle">
 
-                    <tr style="width: 500px">
+                    <tr>
                         <td style="width: 80px">UUID</td>
-                        <td colspan="3" style="width: 420px">
+                        <td>
                             <input id="id" class="input-text" type="text" style="width: 100%" readonly>
                         </td>
-                    </tr>
-
-                    <tr>
                         <td style="width: 80px">账号</td>
-                        <td style="width: 170px">
+                        <td>
                             <input id="account" class="input-text" type="text" readonly>
                         </td>
-                        <td style="width: 80px">昵称</td>
-                        <td style="width: 170px">
-                            <input id="nameNick" class="input-text" type="text" readonly>
-                        </td>
                     </tr>
 
                     <tr>
+                        <td style="width: 80px">昵称</td>
+                        <td>
+                            <input id="nameNick" class="input-text" type="text" readonly>
+                        </td>
                         <td>姓名</td>
                         <td>
                             <input id="nameReal" class="input-text" type="text" readonly>
-                        </td>
-                        <td>编号</td>
-                        <td>
-                            <input id="schoolId" class="input-text" type="text" readonly>
                         </td>
                     </tr>
 
                     <tr>
                         <td>性别</td>
-                        <td valign="center" align="left">
+                        <td valign="center" style="text-align: left;">
                             <input id="gender_male" class="input-radio" type="radio" name="gender" value="male" disabled="true">男&nbsp;&nbsp;&nbsp;
                             <input id="gender_female" class="input-radio" type="radio" name="gender" value="female" disabled="true">女
                         </td>
-                        <td>部门</td>
-                        <td>
-                            <input id="schoolClass" class="input-text" type="text" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td>家庭地址</td>
                         <td>
-                            <input id="schoolMajor" class="input-text" type="text" readonly>
+                            <input id="address" class="input-text" type="text" readonly>
                         </td>
-<!--                        <td>院系</td>-->
-<!--                        <td>-->
-<!--                            <input id="schoolFaculty" class="input-text" type="text" readonly>-->
-<!--                        </td>-->
                     </tr>
 
                     <tr>
                         <td>联系电话</td>
-                        <td colspan="3">
+                        <td>
                             <input id="phone" class="input-text" type="tel" style="width: 100%" readonly>
                         </td>
-                    </tr>
-
-                    <tr>
                         <td>电子邮箱</td>
-                        <td colspan="3">
+                        <td>
                             <input id="email" class="input-text" type="email" style="width: 100%" readonly>
                         </td>
                     </tr>
@@ -99,20 +92,16 @@
                     <tr>
                         <td>个性签名</td>
                         <td colspan="3">
-                            <input id="description" class="input-text" type="text" style="width: 100%" readonly>
+                            <textarea rows="5" id="description" class="input-text" style="width: 99%" readonly></textarea>
                         </td>
                     </tr>
 
                     <tr>
-                        <td colspan="4" style="height: 12px"></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" align="right">
+                        <td colspan="2" style="text-align: right;">
                             <input class="input-btn" type="button" value="编辑" id="edit" onclick="pageGoto('edit')" style="margin-right:16px;">
                             <input class="input-btn hidden" type="button" value="取消" id="cancel" onclick="pageGoto('cancel')" style="margin-right:16px;">
                         </td>
-                        <td colspan="2" align="left">
+                        <td colspan="2" style="text-align: left;">
                             <input class="input-btn" type="button" value="回到主页面" id="back" onclick="pageGoto('back')" style="margin-left:16px;">
                             <input class="input-btn hidden" type="button" value="保存" id="save" onclick="pageGoto('save')" style="margin-left:16px;">
                         </td>

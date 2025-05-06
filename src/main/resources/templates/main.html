@@ -59,6 +59,7 @@
 
             <div class="div-leftMenu" style="margin-top: unset">
                 <ul>
+                    <li><button class="btn-collapsible btn-select" id="btn-7" onclick="pageGoto(7)">活动推荐</button></li>
                     <li><button class="btn-collapsible btn-select" id="btn-0" onclick="pageGoto(0)">活动列表</button></li>
                     <li th:if="${#session.getAttribute('showBtn-1')}"><button class="btn-collapsible" id="btn-1" onclick="pageGoto(1)">活动管理</button></li>
                     <li th:if="${#session.getAttribute('showBtn-2')}"><button class="btn-collapsible" id="btn-2" onclick="pageGoto(2)">我的活动</button></li>
@@ -75,6 +76,35 @@
         <div class="div-right">
 
             <main>
+                <!-- 活动推荐 -->
+                <section id="recommend" class="show">
+
+                    <h1>活动推荐</h1>
+
+                    <table border="1" align="left" class="tableDisplay">
+                        <tr>
+                            <th colspan="4" >
+                                <input type="button" value="换一批" id="logout" onclick="refreshRecommend()" style="width: 100%; height: 100%; border: none; background-color: #96CDCD; color: black; font-size: 16px;">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 30%">活动名</th>
+                            <th style="width: 30%">活动类型</th>
+                            <th style="width: 30%">活动地点</th>
+                            <th class="column-center" style="width: 10%">操作</th>
+                        </tr>
+                        <tr th:each="act, status : ${actListRandom}" th:if="${status.index < 20}">
+                            <td th:text="${act.getName()}"></td>
+                            <td th:text="${act.getType()}"></td>
+                            <td th:text="${act.getActvenue()}"></td>
+                            <td class="column-center">
+                                <a role="button" th:href="@{/act/findAct/{id}(id=${act.getId()})}" target="_blank">查看</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </section>
+
                 <!-- 活动列表 -->
                 <section id="activities" class="show">
 
@@ -291,10 +321,11 @@
 
             </main>
 
-            <footer>
-                <p>&copy; 2025 智能人员与活动管理系统</p>
-            </footer>
+        </div>
 
+        <!--右侧底部-->
+        <div class="div-bottom">
+            &copy; 2025 智能人员与活动管理系统
         </div>
 
     </div>

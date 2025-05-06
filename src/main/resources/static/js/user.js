@@ -17,21 +17,18 @@ function getInfo() {
         .then(resp => {
             console.log(resp);
             if (resp.data != null) {
-                document.getElementById("id").value = resp.data.id;
+                document.getElementById(    "id").value = resp.data.id;
                 document.getElementById("account").value = resp.data.account;
                 document.getElementById("nameNick").value = resp.data.nameNick;
                 document.getElementById("nameReal").value = resp.data.nameReal;
-                document.getElementById("schoolId").value = resp.data.schoolId;
                 if (resp.data.gender === "male" || resp.data.gender === "female") {
                     document.getElementById("gender_" + resp.data.gender).checked = true;
                 } else {
                     document.getElementById("gender_male").checked = true;
                 }
-                document.getElementById("schoolClass").value = resp.data.schoolClass;
-                document.getElementById("schoolMajor").value = resp.data.schoolMajor;
-                // document.getElementById("schoolFaculty").value = resp.data.schoolFaculty;
                 document.getElementById("phone").value = resp.data.phone;
                 document.getElementById("email").value = resp.data.email;
+                document.getElementById("address").value = resp.data.address;
                 document.getElementById("description").value = resp.data.description;
             }
         })
@@ -48,11 +45,9 @@ function pageGoto(where) {
         "account",
         "nameNick",
         "nameReal",
-        "schoolId",
-        "schoolClass",
-        "schoolMajor",
-        "phone",
         "email",
+        "phone",
+        "address",
         "description"
     ];
     switch (where) {
@@ -93,7 +88,7 @@ function pageGoto(where) {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: `id=${encodeURIComponent(document.getElementById("id").value)}&account=${encodeURIComponent(document.getElementById(inputIds[0]).value)}&nameNick=${encodeURIComponent(document.getElementById(inputIds[1]).value)}&nameReal=${encodeURIComponent(document.getElementById(inputIds[2]).value)}&schoolId=${encodeURIComponent(document.getElementById(inputIds[3]).value)}&schoolClass=${encodeURIComponent(document.getElementById(inputIds[4]).value)}&schoolMajor=${encodeURIComponent(document.getElementById(inputIds[5]).value)}&schoolFaculty=${encodeURIComponent(document.getElementById(inputIds[6]).value)}&phone=${encodeURIComponent(document.getElementById(inputIds[7]).value)}&email=${encodeURIComponent(document.getElementById(inputIds[8]).value)}&description=${encodeURIComponent(document.getElementById(inputIds[9]).value)}&gender=${encodeURIComponent(gender)}`
+                body: `id=${encodeURIComponent(document.getElementById("id").value)}&account=${encodeURIComponent(document.getElementById(inputIds[0]).value)}&nameNick=${encodeURIComponent(document.getElementById(inputIds[1]).value)}&nameReal=${encodeURIComponent(document.getElementById(inputIds[2]).value)}&email=${encodeURIComponent(document.getElementById(inputIds[3]).value)}&phone=${encodeURIComponent(document.getElementById(inputIds[4]).value)}&address=${encodeURIComponent(document.getElementById(inputIds[5]).value)}&description=${encodeURIComponent(document.getElementById(inputIds[6]).value)}&gender=${encodeURIComponent(gender)}`
             })
                 .then(response => response.json())
                 .then(resp => {

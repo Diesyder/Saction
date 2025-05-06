@@ -23,6 +23,7 @@ function pageGoto(where) {
         "btn-4",
         "btn-5",
         "btn-6",
+        "btn-7",
     ];
     const selectIds = [
         "activities",
@@ -31,7 +32,8 @@ function pageGoto(where) {
         "organizations",
         "organizationsManage",
         "myOrganizations",
-        "userManage"
+        "userManage",
+        "recommend"
     ];
     // 设置全部btn未选中和div不可见
     for (let i = 0; i < btnIds.length; i++) {
@@ -46,4 +48,9 @@ function pageGoto(where) {
     // 记忆当前选择
     localStorage.setItem('selection', where);
     return;
+}
+
+// 刷新推荐
+function refreshRecommend() {
+    location.reload();
 }

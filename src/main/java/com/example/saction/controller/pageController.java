@@ -93,6 +93,17 @@ public class pageController {
         return "findOrg";
     }
 
+
+    // 刷新推荐界面
+    @PostMapping("act/refreshRecommend")
+    @ResponseBody
+    public Result refreshRecommend(Model model) {
+        List<Activity> actListRandom = actService.findAllAct();
+        Collections.shuffle(actListRandom);
+        model.addAttribute("actListRandom", actListRandom);
+        return Result.success(actListRandom, "返还查找的活动信息");
+    }
+
     // 前往主界面
     @GetMapping("/main")
     public String jumpMain(HttpServletRequest request, Model model) {
@@ -124,6 +135,7 @@ public class pageController {
         model.addAttribute("userList", userList);
         // 活动
         List<Activity> actList = actService.findAllAct();
+        List<Activity> actListRandom = actService.findAllAct();
         if (session.getAttribute("actid") != null) {
             List<Activity> actListById = new ArrayList<>();
             for (Activity x : actList) {
@@ -135,6 +147,8 @@ public class pageController {
             actList = actListById;
         }
         model.addAttribute("actList", actList);
+        Collections.shuffle(actListRandom);
+        model.addAttribute("actListRandom", actListRandom);
         // 组织
         List<Organization> orgList = orgService.findAllOrg();
         model.addAttribute("orgList", orgList);

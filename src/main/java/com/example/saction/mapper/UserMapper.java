@@ -41,14 +41,11 @@ public interface UserMapper {
             "account = #{user.account}, " +
             "nameNick = #{user.nameNick}, " +
             "nameReal = #{user.nameReal}, " +
-            "schoolId = #{user.schoolId}, " +
-            "schoolClass = #{user.schoolClass}, " +
-            "schoolMajor = #{user.schoolMajor}, " +
-            "schoolFaculty = #{user.schoolFaculty}, " +
             "phone = #{user.phone}, " +
             "email = #{user.email}, " +
-            "description = #{user.description}, " +
-            "gender = #{user.gender} " +
+            "gender = #{user.gender}, " +
+            "address = #{user.address}, " +
+            "description = #{user.description} " +
             "where id = #{user.id}")
     int updateUserInfo(@Param("user") User user);
     // 根据id修改用户的权限

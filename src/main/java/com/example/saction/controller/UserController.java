@@ -172,14 +172,11 @@ public class UserController {
             @RequestParam String account,
             @RequestParam String nameNick,
             @RequestParam String nameReal,
-            @RequestParam String schoolId,
-            @RequestParam String schoolClass,
-            @RequestParam String schoolMajor,
-            @RequestParam String schoolFaculty,
-            @RequestParam String phone,
             @RequestParam String email,
-            @RequestParam String description,
-            @RequestParam String gender
+            @RequestParam String phone,
+            @RequestParam String gender,
+            @RequestParam String address,
+            @RequestParam String description
     ) {
         // 查找id对应的数据行
         User user = userService.loginIn(id);
@@ -192,19 +189,16 @@ public class UserController {
             return Result.error("006","该账号已存在！");
         }
         // 对user类进行修改后,传入数据库
-        user.setAccount(account);
-        user.setNameNick(nameNick);
-        user.setNameReal(nameReal);
-        user.setSchoolId(schoolId);
-        user.setSchoolClass(schoolClass);
-        user.setSchoolMajor(schoolMajor);
-        user.setSchoolFaculty(schoolFaculty);
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setDescription(description);
-        user.setGender(gender);
+        user.setAccount(account); // 账号
+        user.setNameNick(nameNick); // 昵称
+        user.setNameReal(nameReal); // 真实姓名
+        user.setEmail(email); // 邮箱
+        user.setPhone(phone); // 电话
+        user.setGender(gender); // 性别
+        user.setAddress(address); // 地址
+        user.setDescription(description); // 个人描述
         userService.updateUserInfo(user);
-        return Result.success(user,"重置密码成功！");
+        return Result.success(user,"设置用户信息成功！");
     }
 
     // 删除用户

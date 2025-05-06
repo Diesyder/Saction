@@ -2,7 +2,6 @@ package com.example.saction.service;
 
 import com.example.saction.mapper.UserMapper;
 import com.example.saction.pojo.User;
-import com.example.saction.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
