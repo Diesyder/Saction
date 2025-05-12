@@ -45,10 +45,7 @@
             <th>报名结束时间</th>
             <th>活动开始时间</th>
             <th>活动结束时间</th>
-            <th>当前报名人数</th>
             <th>最大报名人数</th>
-            <th>需要签到</th>
-            <th>需要签退</th>
             <th>操作</th>
         </tr>
         <tr th:each="act:${actList}">
@@ -60,16 +57,16 @@
             <td th:text="${#dates.format(act.getSignuptimeEnd(), 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(act.getActtimeStart(), 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(act.getActtimeEnd(), 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${act.getMemberCurrent()}"></td>
+<!--            <td th:text="${act.getMemberCurrent()}"></td>-->
             <td th:text="${act.getMemberMax()}"></td>
-            <td>
-                <span th:if="${act.getIsSigninNeed()} == '0'">否</span>
-                <span th:unless="${act.getIsSigninNeed()} == '0'">是</span>
-            </td>
-            <td>
-                <span th:if="${act.getIsSignoutNeed()} == '0'">否</span>
-                <span th:unless="${act.getIsSignoutNeed()} == '0'">是</span>
-            </td>
+<!--            <td>-->
+<!--                <span th:if="${act.getIsSigninNeed()} == '0'">否</span>-->
+<!--                <span th:unless="${act.getIsSigninNeed()} == '0'">是</span>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <span th:if="${act.getIsSignoutNeed()} == '0'">否</span>-->
+<!--                <span th:unless="${act.getIsSignoutNeed()} == '0'">是</span>-->
+<!--            </td>-->
             <td>
                 <button th:attr="actid=${act.getId()}" onclick="actOps('d', this.getAttribute('actid'))">删除</button>
             </td>
@@ -83,24 +80,32 @@
             <th>事件ID</th>
             <th>用户ID</th>
             <th>活动ID</th>
-            <th>加入时间</th>
-            <th>是否签到</th>
-            <th>是否签退</th>
+            <th>申请类型</th>
+            <th>申请时间</th>
+            <th>是否通过</th>
+            <th>受理时间</th>
+            <th>签到时间</th>
+<!--            <th>是否签到</th>-->
+<!--            <th>是否签退</th>-->
             <th align="center">操作</th>
         </tr>
         <tr th:each="ja:${jaList}">
             <td th:text="${ja.getId()}"></td>
             <td th:text="${ja.getUserid()}"></td>
             <td th:text="${ja.getActid()}"></td>
-            <td th:text="${#dates.format(ja.getTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td>
-                <span th:if="${ja.getIsSignin()} == '0'">否</span>
-                <span th:unless="${ja.getIsSignin()} == '0'">是</span>
-            </td>
-            <td>
-                <span th:if="${ja.getIsSignout()} == '0'">否</span>
-                <span th:unless="${ja.getIsSignout()} == '0'">是</span>
-            </td>
+            <td th:text="${ja.getType()}"></td>
+            <td th:text="${#dates.format(ja.getApplytime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${ja.getIsPass()}"></td>
+            <td th:text="${#dates.format(ja.getHandletime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(ja.getSigntime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+<!--            <td>-->
+<!--                <span th:if="${ja.getIsSignin()} == '0'">否</span>-->
+<!--                <span th:unless="${ja.getIsSignin()} == '0'">是</span>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <span th:if="${ja.getIsSignout()} == '0'">否</span>-->
+<!--                <span th:unless="${ja.getIsSignout()} == '0'">是</span>-->
+<!--            </td>-->
             <td>
                 <button th:attr="jaid=${ja.getId()}" onclick="generalOps('joinAct-d', this.getAttribute('jaid'))">删除</button>
             </td>

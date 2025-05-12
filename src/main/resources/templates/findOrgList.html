@@ -40,7 +40,7 @@
             <th>ID</th>
             <th>组织名</th>
             <th>组织类型</th>
-            <th>可申请加入</th>
+<!--            <th>可申请加入</th>-->
             <th>描述</th>
             <th align="center">操作</th>
         </tr>
@@ -48,10 +48,10 @@
             <td th:text="${org.getId()}"></td>
             <td th:text="${org.getName()}"></td>
             <td th:text="${org.getType()}"></td>
-            <td>
-                <span th:if="${org.getIsJoinAllowed()} == '0'">否</span>
-                <span th:unless="${org.getIsJoinAllowed()} == '0'">是</span>
-            </td>
+<!--            <td>-->
+<!--                <span th:if="${org.getIsJoinAllowed()} == '0'">否</span>-->
+<!--                <span th:unless="${org.getIsJoinAllowed()} == '0'">是</span>-->
+<!--            </td>-->
             <td th:text="${org.getDescription()}"></td>
             <td>
                 <button th:attr="orgid=${org.getId()}" onclick="orgOps('d', this.getAttribute('orgid'))">删除</button>
@@ -66,14 +66,18 @@
             <th>事件ID</th>
             <th>用户ID</th>
             <th>组织ID</th>
-            <th>加入时间</th>
+            <th>申请时间</th>
+            <th>是否通过</th>
+            <th>受理时间</th>
             <th align="center">操作</th>
         </tr>
         <tr th:each="jo:${joList}">
             <td th:text="${jo.getId()}"></td>
             <td th:text="${jo.getUserid()}"></td>
-            <td th:text="${jo.getOrgid()}"></td>
-            <td th:text="${#dates.format(jo.getTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${jo.getType()}"></td>
+            <td th:text="${#dates.format(jo.getApplytime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${jo.getIsPass()}"></td>
+            <td th:text="${#dates.format(jo.getHandletime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
                 <button th:attr="joid=${jo.getId()}" onclick="generalOps('joinOrg-d', this.getAttribute('joid'))">删除</button>
             </td>

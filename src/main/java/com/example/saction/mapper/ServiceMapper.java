@@ -35,19 +35,26 @@ public interface ServiceMapper {
     JoinAct findJAById(@Param("id") int id);
 
     // 根据id删除加入组织关联
-    @Delete("delete from joinorg where id = #{id}")
-    int deleteJO(@Param("id") int id);
+    @Delete("delete from joinorg where orgid = #{orgid} and userid = #{userid}")
+    int deleteJO(@Param("orgid") int actid, @Param("userid") int userid);
 
     // 根据id删除加入活动关联
-    @Delete("delete from joinact where id = #{id}")
-    int deleteJA(@Param("id") int id);
+    @Delete("delete from joinact where actid = #{actid} and userid = #{userid}")
+    int deleteJA(@Param("actid") int actid, @Param("userid") int userid);
 
-    // 新增加入组织关联
-    @Insert("insert into joinorg (userid, orgid, time) values (#{userid}, #{orgid}, #{time})")
-    int joinOrg(@Param("userid") int userid, @Param("orgid") int orgid, @Param("time") Long time);
+    // 新增申请加入组织关联
+    @Insert("insert into joinorg (userid, orgid, applytime) values (#{userid}, #{orgid}, #{applytime})")
+    int applyOrg(@Param("userid") int userid, @Param("orgid") int orgid, @Param("applytime") Long time);
+
+    // 确认加入组织关联，更新处理状态和处理时间
+    @Update("update joinorg set " +
+            "ispass = 1, " +
+            "handletime = #{handletime} " +
+            "where id = #{joinorg.id}")
+    int joinOrg(@Param("joinorg") JoinOrg joinorg, @Param("handletime") Long time);
 
     // 新增加入活动关联
-    @Insert("insert into joinact (userid, actid, time) values (#{userid}, #{actid}, #{time})")
-    int joinAct(@Param("userid") int userid, @Param("actid") int actid, @Param("time") Long time);
+    @Insert("insert into joinact (userid, actid, applytime) values (#{userid}, #{actid}, #{applytime})")
+    int joinAct(@Param("userid") int userid, @Param("actid") int actid, @Param("applytime") Long time);
 
 }

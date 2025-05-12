@@ -45,3 +45,13 @@ td {
     overflow: hidden; /* 隐藏超出单元格的内容 */
     text-overflow: ellipsis; /* 超出部分显示省略号 */
 }
+
+a {
+    display: inline-block;
+    width: 99%; /* 设置宽度 */
+    height: 20px; /* 设置高度 */
+    border: none; /* 无边框 */
+    text-align: center; /* 文本居中 */
+    line-height: 20px; /* 行高与高度相同，使文本垂直居中 */
+    text-decoration: none; /* 去除下划线 */
+}

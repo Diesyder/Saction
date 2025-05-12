@@ -10,91 +10,99 @@
 </head>
 <body>
 
-    <h1 style="text-align: center">活动信息</h1>
+    <div>
+
+        <br><br><br>
+        <h1 style="text-align: center">活动信息</h1>
 
 
-    <table border="1" align="center" style="width: 50%;">
-        <tr>
-            <td width="10%">ID</td>
-            <td>
-                <input type="text" th:value="${act.getId()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>活动名称</td>
-            <td>
-                <input type="text" th:value="${act.getName()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>活动类型</td>
-            <td>
-                <input type="text" th:value="${act.getType()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>活动地点</td>
-            <td>
-                <input type="text" th:value="${act.getActvenue()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>报名开始时间</td>
-            <td>
-                <input type="text" th:value="${#dates.format(act.getSignuptimeStart(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>报名结束时间</td>
-            <td>
-                <input type="text" th:value="${#dates.format(act.getSignuptimeEnd(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>活动开始时间</td>
-            <td>
-                <input type="text" th:value="${#dates.format(act.getActtimeStart(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>活动结束时间</td>
-            <td>
-                <input type="text" th:value="${#dates.format(act.getActtimeEnd(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>当前报名人数</td>
-            <td>
-                <input type="text" th:value="${act.getMemberCurrent()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>最大报名人数</td>
-            <td>
-                <input type="text" th:value="${act.getMemberMax()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>需要签到</td>
-            <td>
-                <input type="text" th:value="${act.getIsSigninNeed() == '0' ? '否' :
-                  (org.getIsJoinAllowed() == '1' ? '是' : '')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>需要签退</td>
-            <td>
-                <input type="text" th:value="${act.getIsSignoutNeed() == '0' ? '否' :
-                  (org.getIsJoinAllowed() == '1' ? '是' : '')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>描述</td>
-            <td>
-                <input type="text" th:value="${act.getDescription()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-    </table>
+        <table border="1" align="center" style="width: 50%;">
+            <tr>
+                <td style="width: 25%">ID</td>
+                <td style="width: 75%" colspan="3">
+                    <input type="text" th:value="${act.getId()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>活动名称</td>
+                <td colspan="3">
+                    <input type="text" th:value="${act.getName()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>活动类型</td>
+                <td colspan="3">
+                    <input type="text" th:value="${act.getType()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>活动地点</td>
+                <td colspan="3">
+                    <input type="text" th:value="${act.getActvenue()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>报名开始时间</td>
+                <td colspan="3">
+                    <input type="text" th:value="${#dates.format(act.getSignuptimeStart(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>报名结束时间</td>
+                <td colspan="3">
+                    <input type="text" th:value="${#dates.format(act.getSignuptimeEnd(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>活动开始时间</td>
+                <td colspan="3">
+                    <input type="text" th:value="${#dates.format(act.getActtimeStart(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>活动结束时间</td>
+                <td colspan="3">
+                    <input type="text" th:value="${#dates.format(act.getActtimeEnd(), 'yyyy-MM-dd HH:mm:ss')}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>最大报名人数</td>
+                <td colspan="3">
+                    <input type="text" th:value="${act.getMemberMax()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>描述</td>
+                <td colspan="3">
+                    <input type="text" th:value="${act.getDescription()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; text-align: center" colspan="4">
+                    <a role="button" th:href="@{/act/apply/{id}(id=${act.getId()})}">申请加入</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/act/sign/{id}(id=${act.getId()})}">进行签到</a>
+                </td>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/act/leave/{id}(id=${act.getId()})}">退出活动</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/act/edit/{id}(id=${act.getId()})}">编辑信息</a>
+                    <a role="button">取消编辑</a>
+                </td>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/act/delete/{id}(id=${act.getId()})}">删除活动</a>
+                    <a role="button">保存编辑</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
 
 </body>
 </html>

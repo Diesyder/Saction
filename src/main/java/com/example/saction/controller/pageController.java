@@ -93,15 +93,31 @@ public class pageController {
         return "findOrg";
     }
 
+    @PostMapping("org/findOrgById")
+    @ResponseBody
+    public Result findOrgById(@RequestParam int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (id == -1) {
+            if (session.getAttribute("orgid") != null) {
+                session.removeAttribute("orgid");
+            }
+            return Result.success(id, "返回默认状态");
+        }
+        Organization org = orgService.findOrg(id);
+        if(org == null) {
+            return Result.error("101", "不存在此组织");
+        }
+        session.setAttribute("orgid", id);
+        return Result.success(org, "返还查找的组织信息");
+    }
 
     // 刷新推荐界面
-    @PostMapping("act/refreshRecommend")
-    @ResponseBody
-    public Result refreshRecommend(Model model) {
+    @GetMapping("act/refreshRecommend")
+    public String refreshRecommend(Model model) {
         List<Activity> actListRandom = actService.findAllAct();
         Collections.shuffle(actListRandom);
         model.addAttribute("actListRandom", actListRandom);
-        return Result.success(actListRandom, "返还查找的活动信息");
+        return "redirect:/main";
     }
 
     // 前往主界面
@@ -119,13 +135,15 @@ public class pageController {
         User userTemp = userService.loginIn(userLast);
         if (userLast != null) {
             session.setAttribute("nameNick", userTemp.getNameNick());
-            session.setAttribute("showBtn-2", "true");
-            session.setAttribute("showBtn-5", "true");
             User user = userService.loginIn(userLast);
-            if (user.getPriority() >= 9) {
+            // 管理员无法参加活动，因此不需要查看自身参加的活动和组织
+            if (user.getPriority() == 1) {
                 session.setAttribute("showBtn-1", "true");
                 session.setAttribute("showBtn-4", "true");
                 session.setAttribute("showBtn-6", "true");
+            } else {
+                session.setAttribute("showBtn-2", "true");
+                session.setAttribute("showBtn-5", "true");
             }
         } else {
             session.setAttribute("nameNick", "未登录");
@@ -151,11 +169,24 @@ public class pageController {
         model.addAttribute("actListRandom", actListRandom);
         // 组织
         List<Organization> orgList = orgService.findAllOrg();
+        if (session.getAttribute("orgid") != null) {
+            List<Organization> orgListById = new ArrayList<>();
+            for (Organization x : orgList) {
+                if (x.getId() == (int) session.getAttribute("orgid")) {
+                    orgListById.add(x);
+                    break;
+                }
+            }
+            orgList = orgListById;
+        }
         model.addAttribute("orgList", orgList);
+        // 用户专属板块
         if (userTemp != null) {
             // 判断活动
             List<Activity> myjaList = new ArrayList<>();
+            // 获取用户的所有加入活动事件
             List<JoinAct> myja = serviceService.findAllMyJA(userTemp.getId());
+            // 对于每一个事件，获取对应的活动，并加入myjaList
             for (JoinAct ja : myja) {
                 Activity act = actService.findAct(ja.getActid());
                 if (act != null) {
@@ -222,28 +253,44 @@ public class pageController {
         return Result.success(act, "返还删除的活动信息");
     }
 
-    // 删除加入组织事务
-    @PostMapping("service/deleteJO")
-    @ResponseBody
-    public Result deleteJO(@RequestParam int id) {
-        // 获取即将删除的对象
-        JoinOrg jo = serviceService.findJO(id);
-        // 删除用户对象
-        serviceService.deleteJO(id);
-        // 返还信息
-        return Result.success(jo, "返还删除的事务信息");
+    // 离开组织
+    @GetMapping("org/leaveOrg/{id}")
+    public String leaveOrg(@PathVariable("id") int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User userTemp = userService.loginIn((String) session.getAttribute("accountCurrent"));
+        serviceService.deleteJO(id, userTemp.getId());
+        return "redirect:/main";
     }
 
-    // 删除加入活动事务
-    @PostMapping("service/deleteJA")
-    @ResponseBody
-    public Result deleteJA(@RequestParam int id) {
-        // 获取即将删除的对象
-        JoinAct ja = serviceService.findJA(id);
-        // 删除用户对象
-        serviceService.deleteJA(id);
-        // 返还信息
-        return Result.success(ja, "返还删除的事务信息");
+    // 离开活动
+    @GetMapping("act/leaveAct/{id}")
+    public String leaveAct(@PathVariable("id") int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User userTemp = userService.loginIn((String) session.getAttribute("accountCurrent"));
+        serviceService.deleteJA(id, userTemp.getId());
+        return "redirect:/main";
+    }
+
+    // 申请加入组织
+    @GetMapping("/org/apply/{id}")
+    public String applyOrg(@PathVariable("id") int orgid, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        // 获取用户
+        User user = userService.loginIn((String) session.getAttribute("accountCurrent"));
+        int userid = user.getId();
+        // 判断用户是否已加入组织
+        List<JoinOrg> joList = serviceService.findAllJO();
+        for (JoinOrg jo : joList) {
+            if (jo.getUserid() == userid && jo.getOrgid() == orgid) {
+                return "redirect:/closePage";
+            }
+        }
+        serviceService.applyOrg(userid, orgid, System.currentTimeMillis());
+        return "redirect:/closePage";
+
+    }@GetMapping("/closePage")
+    public String closePage() {
+        return "closePage";
     }
 
 }

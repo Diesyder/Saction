@@ -11,41 +11,59 @@
 </head>
 <body>
 
-    <h1 style="text-align: center">组织信息</h1>
+    <div>
 
-    <table border="1" align="center" style="width: 50%;">
-        <tr>
-            <td width="10%">ID</td>
-            <td>
-                <input type="text" th:value="${org.getId()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>组织名称</td>
-            <td>
-                <input type="text" th:value="${org.getName()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>组织类型</td>
-            <td>
-                <input type="text" th:value="${org.getType()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>可申请加入</td>
-            <td>
-                <input type="text" th:value="${org.getIsJoinAllowed() == '0' ? '否' :
-                  (org.getIsJoinAllowed() == '1' ? '是' : '')}" readonly style="width: 99%;">
-            </td>
-        </tr>
-        <tr>
-            <td>描述</td>
-            <td>
-                <input type="text" th:value="${org.getDescription()}" readonly style="width: 99%;">
-            </td>
-        </tr>
-    </table>
+        <br><br><br>
+        <h1 style="text-align: center">组织信息</h1>
+
+        <table border="1" align="center" style="width: 50%;">
+            <tr>
+                <td style="width: 25%">ID</td>
+                <td style="width: 75%" colspan="3">
+                    <input type="text" th:value="${org.getId()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>组织名称</td>
+                <td colspan="3">
+                    <input type="text" th:value="${org.getName()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>组织类型</td>
+                <td colspan="3">
+                    <input type="text" th:value="${org.getType()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td>描述</td>
+                <td colspan="3">
+                    <input type="text" th:value="${org.getDescription()}" readonly style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; text-align: center" colspan="4">
+                    <a role="button" th:href="@{/org/apply/{id}(id=${org.getId()})}">申请加入</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/org/leave/{id}(id=${org.getId()})}">退出组织</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/org/edit/{id}(id=${org.getId()})}">编辑信息</a>
+                    <a role="button">取消编辑</a>
+                </td>
+                <td style="width: 50%; text-align: center" colspan="2">
+                    <a role="button" th:href="@{/org/delete/{id}(id=${org.getId()})}">解散组织</a>
+                    <a role="button">保存编辑</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
 
 </body>
 </html>

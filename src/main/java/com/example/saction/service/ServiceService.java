@@ -34,14 +34,17 @@ public class ServiceService {
     public JoinAct findJA(int id) {
         return serviceMapper.findJAById(id);
     }
-    public int deleteJO(int id) {
-        return serviceMapper.deleteJO(id);
+    public int deleteJO(int orgid, int userid) {
+        return serviceMapper.deleteJO(orgid, userid);
     }
-    public int deleteJA(int id) {
-        return serviceMapper.deleteJA(id);
+    public int deleteJA(int actid, int userid) {
+        return serviceMapper.deleteJA(actid, userid);
     }
-    public int joinOrg(int userid, int orgid, long time) {
-        return serviceMapper.joinOrg(userid, orgid, time);
+    public int applyOrg(int userid, int orgid, long time) {
+        return serviceMapper.applyOrg(userid, orgid, time);
+    }
+    public int joinOrg(JoinOrg joinOrg, long time) {
+        return serviceMapper.joinOrg(joinOrg, time);
     }
     public int joinAct(int userid, int actid, long time) {
         return serviceMapper.joinAct(userid, actid, time);

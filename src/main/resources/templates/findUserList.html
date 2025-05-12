@@ -65,12 +65,9 @@
             <th>密码</th>
             <th>昵称</th>
             <th>名字</th>
-            <th>学号</th>
-            <th>班级</th>
-            <th>专业</th>
-            <th>院系</th>
             <th>邮箱</th>
             <th>电话</th>
+            <th>地址</th>
             <th>性别</th>
             <th>权限级别</th>
             <th>最后登录时间</th>
@@ -84,12 +81,9 @@
             <td th:text="${user.getPassword()}"></td>
             <td th:text="${user.getNameNick()}"></td>
             <td th:text="${user.getNameReal()}"></td>
-            <td th:text="${user.getSchoolId()}"></td>
-            <td th:text="${user.getSchoolClass()}"></td>
-            <td th:text="${user.getSchoolMajor()}"></td>
-            <td th:text="${user.getSchoolFaculty()}"></td>
             <td th:text="${user.getEmail()}"></td>
             <td th:text="${user.getPhone()}"></td>
+            <td th:text="${user.getAddress()}"></td>
             <td>
                 <span th:if="${user.getGender()} == 'male'">男</span>
                 <span th:if="${user.getGender()} == 'female'">女</span>

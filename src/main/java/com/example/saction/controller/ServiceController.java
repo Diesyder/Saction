@@ -41,27 +41,14 @@ public class ServiceController {
     @Resource
     ServiceService serviceService;
 
-    // 加入组织
-    @PostMapping("/joinOrg")
+    // 确认加入组织
+    @PostMapping("/joinOrg/{id}")
     @ResponseBody
-    public Result joinOrg(@RequestParam int userid, @RequestParam int orgid) {
-        // 查找是否存在对应用户和对应组织
-        User user = userService.loginIn(userid);
-        if (user == null) {
-            return Result.error("001","该账号不存在！");
-        }
-        Organization org = orgService.findOrg(orgid);
-        if (org == null) {
-            return Result.error("002","该组织不存在！");
-        }
-        List<JoinOrg> joList = serviceService.findAllJO();
-        for (JoinOrg jo : joList) {
-            if (jo.getUserid() == userid && jo.getOrgid() == orgid) {
-                return Result.error("003", "该用户已加入该组织！");
-            }
-        }
-        serviceService.joinOrg(userid, orgid, System.currentTimeMillis());
-        return Result.success(user,"加入成功！");
+    public Result joinOrg(@PathVariable("id") int id) {
+        // 查找对应关联
+        JoinOrg joinorg = serviceService.findJO(id);
+        serviceService.joinOrg(joinorg, System.currentTimeMillis());
+        return Result.success(joinorg,"加入成功！");
     }
 
     // 加入活动

@@ -232,6 +232,10 @@ function userOps(ops, id) {
                 window.alert("id或权限不能为空");
                 return;
             }
+            if (pri_2 != 1 && pri_2 != 0) {
+                window.alert("权限仅可设置为0或1");
+                return;
+            }
             fetch("/user/updatePriority", {
                 method: "POST",
                 headers: {
@@ -328,7 +332,6 @@ function actOps(ops, id) {
                     if (resp.data != null) {
                         location.reload(); // 刷新页面
                     }
-
                     switch (resp.code) {
                         case "101" :
                             toastr.error("不存在此活动!", "查找失败");
@@ -343,6 +346,62 @@ function actOps(ops, id) {
             return;
         case 'd' :
             fetch("/act/deleteAct", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `id=${encodeURIComponent(id)}`
+            })
+                .then(response => response.json())
+                .then(resp => {
+                    console.log(resp);
+                    if (resp.data != null) {
+                        location.reload(); // 刷新页面
+                    }
+                })
+                .catch(error => {
+                    console.error("请求出错：", error);
+                });
+            return;
+    }
+    return;
+}
+
+// 组织操作
+function orgOps(ops, id) {
+    switch (ops) {
+        case 'r' :
+            let orgid = document.getElementById("orgId").value;
+            if (orgid == null || orgid == "") {
+                orgid = -1;
+            }
+            fetch("/org/findOrgById", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `id=${encodeURIComponent(orgid)}`
+            })
+                .then(response => response.json())
+                .then(resp => {
+                    console.log(resp);
+                    if (resp.data != null) {
+                        location.reload(); // 刷新页面
+                    }
+                    switch (resp.code) {
+                        case "101" :
+                            toastr.error("不存在此组织!", "查找失败");
+                            return;
+                        default:
+                            toastr.error("请输入正确的值!", "查找失败");
+                    }
+                })
+                .catch(error => {
+                    console.error("请求出错：", error);
+                });
+            return;
+        case 'd' :
+            fetch("/org/deleteOrg", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
